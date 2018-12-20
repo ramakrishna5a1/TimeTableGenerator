@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1065654498748",
+    "firebase_url": "https://smarttimetable-a3f1f.firebaseio.com",
+    "project_id": "smarttimetable-a3f1f",
+    "storage_bucket": "smarttimetable-a3f1f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1065654498748:android:d11b8224a1f4db83",
+        "android_client_info": {
+          "package_name": "rk.com.timetablegenerator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1065654498748-qsrnpj6hn6j5u168ab94q6t82484gpl4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6Q4yfaagWFtEOJiju3PPKghO-H1fUGwE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
