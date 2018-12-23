@@ -1,4 +1,4 @@
-package rk.com.timetablegenerator;
+package rk.com.users;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
