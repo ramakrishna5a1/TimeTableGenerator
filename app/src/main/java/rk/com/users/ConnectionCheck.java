@@ -5,11 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.widget.Toast;
 
 public class ConnectionCheck extends BroadcastReceiver
 {
-    boolean connection;
+    static boolean connection;
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -22,12 +21,12 @@ public class ConnectionCheck extends BroadcastReceiver
         {
             if (isConnected)
             {
-                Toast.makeText(context, "Network connected", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Network connected", Toast.LENGTH_SHORT).show();
                 connection = true;
             }
             else if (intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, Boolean.FALSE))
             {
-                Toast.makeText(context, "There's no network connectivity", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "There's no network connectivity", Toast.LENGTH_SHORT).show();
                 connection = false;
             }
         }

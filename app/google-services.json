@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1065654498748-vmjc12ejbsqqpb74k2o9f0btg4ltg249.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rk.com.timetablegenerator",
+            "certificate_hash": "121cad92146464b81bd40325efbd89f581a82c16"
+          }
+        },
+        {
           "client_id": "1065654498748-qsrnpj6hn6j5u168ab94q6t82484gpl4.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1065654498748-qsrnpj6hn6j5u168ab94q6t82484gpl4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
