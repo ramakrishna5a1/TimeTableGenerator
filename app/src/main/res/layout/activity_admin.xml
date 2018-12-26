@@ -1,8 +1,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:layout_gravity="center"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=""
+            android:paddingRight="10dp"
+            android:text="FACULTY" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=""
+            android:text="STUDENT" />
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/name"
@@ -11,11 +34,11 @@
         android:layout_margin="20dp" />
 
     <Button
-        android:onClick="registerUser"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textStyle="bold"
+        android:layout_margin="20dp"
+        android:onClick="registerUser"
         android:text="@string/ok"
-        android:layout_margin="20dp" />
+        android:textStyle="bold" />
 
 </LinearLayout>

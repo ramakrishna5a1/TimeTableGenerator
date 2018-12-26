@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="rk.com.users">
 
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 
     <application
@@ -15,14 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="rk.com.users.LoginActivity">
+        <activity android:name="rk.com.users.AdminActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="rk.com.users.AdminActivity" />
+        <activity android:name="rk.com.users.LoginActivity" />
         <activity android:name="rk.com.users.StudentActivity" />
 
         <receiver android:name=".ConnectionCheck">
