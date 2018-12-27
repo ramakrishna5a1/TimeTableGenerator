@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         fireBase = new FireBase();
 
-        ArrayAdapter<String> aa = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, users);
+        ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, users);
         spin.setAdapter(aa);
 
         spin.setOnItemSelectedListener(this);
@@ -66,9 +66,8 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             } else if (!userName.equals("") || !password.equals(""))
             {
                 //login code here
-                fireBase.userData();
-            } else
-                Toast.makeText(this, "Enter all the details", Toast.LENGTH_LONG).show();
+
+            } else Toast.makeText(this, "Enter all the details", Toast.LENGTH_LONG).show();
         } else
         {
             Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
@@ -88,5 +87,4 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     {
         // Another interface callback
     }
-
 }

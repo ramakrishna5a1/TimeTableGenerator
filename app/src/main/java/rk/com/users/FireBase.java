@@ -13,8 +13,18 @@ class FireBase
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    public void userData()
+
+    public void setUser(String userType,String userName, String password)
     {
-        mDatabase.child(users[1]).child("sir2").setValue("2");
+        mDatabase.child(userType).child(userName).setValue("");
     }
+
+    public String getPassword(String userType,String userName)
+    {
+        String password = mDatabase.child(userType).child(userName).getKey();
+
+        return password;
+    }
+
+
 }

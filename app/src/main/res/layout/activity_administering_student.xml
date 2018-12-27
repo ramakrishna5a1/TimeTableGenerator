@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <EditText
+        android:id="@+id/student_roll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_view_height"
+        android:backgroundTint="@color/edit_text_line" />
+
+    <EditText
+        android:id="@+id/student_password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_view_height"
+        android:backgroundTint="@color/edit_text_line" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_view_height"
+        android:text="Register" />
+
+</LinearLayout>

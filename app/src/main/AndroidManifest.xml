@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -15,16 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="rk.com.users.AdminActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="rk.com.users.LoginActivity" />
-        <activity android:name="rk.com.users.StudentActivity" />
-
         <receiver android:name=".ConnectionCheck">
             <intent-filter>
                 <action
@@ -32,6 +28,12 @@
                     tools:ignore="BatteryLife" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".StudentActivity" />
+
+        <activity android:name=".AdministeringStudent" />
+        <activity android:name=".AdministeringFaculty"/>
     </application>
 
 </manifest>
