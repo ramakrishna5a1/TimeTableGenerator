@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="toggle_text" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:backgroundTintMode">@color/colorPrimary</item>
+    </style>
+
 </resources>

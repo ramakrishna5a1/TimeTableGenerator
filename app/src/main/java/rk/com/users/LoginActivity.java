@@ -1,5 +1,6 @@
 package rk.com.users;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
-    final String users[] = {"Login Type", "Administrator", "Student", "Faculty", "HOD"};
+    final String users[] = {"Login Type", "admin", "student", "faculty", "HOD"};
     Spinner spin;
 
     EditText etUserName, etPassword;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         fireBase = new FireBase();
 
-        ArrayAdapter<String> aa = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, users);
+        ArrayAdapter<String> aa = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, users);
         spin.setAdapter(aa);
 
         spin.setOnItemSelectedListener(this);
@@ -63,12 +64,23 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             if (userType.equals("Login Type"))
             {
                 Toast.makeText(this, "Select Login Type", Toast.LENGTH_LONG).show();
-            } else if (!userName.equals("") || !password.equals(""))
+            } else if (!userName.equals("") && !password.equals(""))
             {
+                String pass2 = fireBase.getPassword(userType, userName);
+
                 //login code here
+                if (password.equals(pass2))
+                {
+                    Toast.makeText(this, "Login success..", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(this,AdminActivity.class));
+                } else
+                {
+                    Toast.makeText(this, "Invalid details", Toast.LENGTH_LONG).show();
+                }
 
             } else Toast.makeText(this, "Enter all the details", Toast.LENGTH_LONG).show();
-        } else
+        }
+        else
         {
             Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
         }

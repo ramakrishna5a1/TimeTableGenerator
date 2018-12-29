@@ -28,6 +28,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="@dimen/login_view_height"
+        android:background="@drawable/button_shape"
         android:text="Register" />
 
 </LinearLayout>

@@ -17,12 +17,13 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/sign_in"
-            android:textColor="#0022ff"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="25sp"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/user_type"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="@dimen/login_view_height"
             android:layout_marginTop="@dimen/margin_top"
@@ -31,15 +32,14 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:hintTextAppearance="@style/toggle_text"
             android:layout_marginTop="@dimen/margin_top"
-            android:backgroundTint="@color/edit_text_line"
             android:gravity="center">
 
             <EditText
                 android:id="@+id/user_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_view_height"
-                android:backgroundTint="@color/edit_text_line"
                 android:hint="@string/user_id"
                 android:inputType="textPersonName"
                 android:textAllCaps="true" />
@@ -52,25 +52,24 @@
             android:layout_marginTop="@dimen/margin_top"
             android:backgroundTint="@color/edit_text_line"
             android:gravity="center"
+            app:hintTextAppearance="@style/toggle_text"
             app:passwordToggleEnabled="true">
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_view_height"
-                android:backgroundTint="@color/edit_text_line"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:textAllCaps="true" />
 
         </android.support.design.widget.TextInputLayout>
 
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="@dimen/login_view_height"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/spinner_background"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/button_shape"
             android:onClick="userLogin"
             android:text="@string/submit"
             android:textAllCaps="true" />
