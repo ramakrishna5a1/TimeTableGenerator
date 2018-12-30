@@ -6,29 +6,56 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-    <EditText
-        android:backgroundTint="@color/edit_text_line"
-        android:id="@+id/faculty_id"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/login_view_height" />
+    <Button
+        android:id="@+id/upload_file"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/login_view_height"
+        style="@style/button_style"
+        android:drawableStart="@drawable/upload_file"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:text="@string/upload_file"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textDirection="rtl" />
 
-    <EditText
-        android:backgroundTint="@color/edit_text_line"
-        android:id="@+id/faculty_password"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/login_view_height" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:text="@string/upload_file_or_manually_enter"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/faculty_id"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_view_height"
+            android:backgroundTint="@color/edit_text_line" />
 
-    <EditText
-        android:backgroundTint="@color/edit_text_line"
-        android:id="@+id/faculty_subject"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/login_view_height" />
+        <EditText
+            android:id="@+id/faculty_password"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_view_height"
+            android:backgroundTint="@color/edit_text_line" />
+
+        <EditText
+            android:id="@+id/faculty_subject"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/login_view_height"
+            android:backgroundTint="@color/edit_text_line" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="@dimen/login_view_height"
+        style="@style/button_style"
         android:background="@drawable/button_shape"
-        android:text="Register" />
-
+        android:text="Register"
+        android:textColor="@color/colorPrimary" />
 </LinearLayout>

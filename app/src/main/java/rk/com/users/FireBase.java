@@ -36,7 +36,7 @@ class FireBase
 
     public void setUser(String userType, String userName, String password)
     {
-        mDatabase.child(userType).child(userName).setValue("");
+        mDatabase.child(userType).child(userName).setValue(password);
     }
 
 

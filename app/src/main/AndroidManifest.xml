@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <receiver android:name=".ConnectionCheck">
             <intent-filter>
                 <action
@@ -31,9 +32,9 @@
 
         <activity android:name=".AdminActivity" />
         <activity android:name=".StudentActivity" />
-
         <activity android:name=".AdministeringStudent" />
         <activity android:name=".AdministeringFaculty" />
+        <activity android:name=".FacultyActivity"></activity>
     </application>
 
 </manifest>

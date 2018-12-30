@@ -32,9 +32,9 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hintTextAppearance="@style/toggle_text"
             android:layout_marginTop="@dimen/margin_top"
-            android:gravity="center">
+            android:gravity="center"
+            app:hintTextAppearance="@style/toggle_text">
 
             <EditText
                 android:id="@+id/user_id"
@@ -66,13 +66,14 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
+            style="@style/button_style"
             android:layout_width="match_parent"
             android:layout_height="@dimen/login_view_height"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/button_shape"
+            android:layout_marginTop="35dp"
             android:onClick="userLogin"
             android:text="@string/submit"
             android:textAllCaps="true" />
+
     </LinearLayout>
 
 </LinearLayout>

@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         etPassword = findViewById(R.id.password);
 
         fireBase = new FireBase();
+        fireBase.setUser(users[1],"sir1","1");
 
         ArrayAdapter<String> aa = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, users);
         spin.setAdapter(aa);
@@ -42,7 +43,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         //registering the NETWORK CHANGE action
         registerReceiver(new ConnectionCheck(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-
     }
 
 
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
      * @return void
      */
 
-    public void userLogin(View view)
+    public void userLogin(View view)throws Exception
     {
         if (ConnectionCheck.connection)
         {
@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
             if (userType.equals("Login Type"))
             {
-                Toast.makeText(this, "Select Login Type", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Choose Login Type", Toast.LENGTH_LONG).show();
             } else if (!userName.equals("") && !password.equals(""))
             {
                 String pass2 = fireBase.getPassword(userType, userName);
@@ -71,16 +71,33 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                 //login code here
                 if (password.equals(pass2))
                 {
+                    switch (userType)
+                    {
+                        case "admin":
+                                startActivity(new Intent(this, AdminActivity.class));
+                            break;
+
+                        case "faculty":
+                            Intent facultyIntent=new Intent(this,FacultyActivity.class);
+                            facultyIntent.putExtra("userId",userName);
+                            startActivity(facultyIntent);
+                            break;
+
+                        case "student":
+                            Intent studentIntent=new Intent(this,StudentActivity.class);
+                            studentIntent.putExtra("userId",userName);
+                            startActivity(studentIntent);
+                            break;
+                    }
                     Toast.makeText(this, "Login success..", Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(this,AdminActivity.class));
+
                 } else
                 {
                     Toast.makeText(this, "Invalid details", Toast.LENGTH_LONG).show();
                 }
 
             } else Toast.makeText(this, "Enter all the details", Toast.LENGTH_LONG).show();
-        }
-        else
+        } else
         {
             Toast.makeText(this, "No internet connection", Toast.LENGTH_LONG).show();
         }

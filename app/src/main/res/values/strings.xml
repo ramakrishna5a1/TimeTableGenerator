@@ -4,5 +4,6 @@
     <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
     <string name="submit">submit</string>
-    <string name="ok">ok</string>
+    <string name="upload_file">Upload File</string>
+    <string name="upload_file_or_manually_enter">Upload File \n or \n Manually Enter Details</string>
 </resources>

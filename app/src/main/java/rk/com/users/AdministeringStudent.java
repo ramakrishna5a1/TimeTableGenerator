@@ -19,4 +19,8 @@ public class AdministeringStudent extends Fragment
 
         return inflater.inflate(R.layout.activity_administering_student,container,false);
     }
+
+    public void uploadFile(View view)
+    {
+    }
 }

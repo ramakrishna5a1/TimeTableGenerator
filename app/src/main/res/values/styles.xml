@@ -15,4 +15,9 @@
         <item name="android:backgroundTintMode">@color/colorPrimary</item>
     </style>
 
+    <style name="button_style" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_shape</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>
