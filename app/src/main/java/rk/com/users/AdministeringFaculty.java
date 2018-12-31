@@ -21,8 +21,8 @@ public class AdministeringFaculty extends Fragment
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        uploadFile= container.findViewById(R.id.upload_file);
-
+        View v=inflater.inflate(R.layout.activity_administering_faculty, container, false);
+        //v.findViewById()
         return inflater.inflate(R.layout.activity_administering_faculty, container, false);
     }
 }
