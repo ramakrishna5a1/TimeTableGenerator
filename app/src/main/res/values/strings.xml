@@ -1,9 +1,18 @@
 <resources>
     <string name="app_name">TimeTableGenerator</string>
-    <string name="user_id">User Id</string>
     <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
     <string name="submit">submit</string>
     <string name="upload_file">Upload File</string>
     <string name="upload_file_or_manually_enter">Upload File \n or \n Manually Enter Details</string>
+    <string name="time_table">timetable</string>
+    <string name="user_id">User Id</string>
+    <string name="view_timetable">View TimeTable</string>
+    <string name="change_password">Change Password</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="subject">Subject</string>
+    <string name="register">Register</string>
+
 </resources>

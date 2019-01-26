@@ -2,6 +2,7 @@ package rk.com.users;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -10,13 +11,14 @@ import com.google.firebase.database.ValueEventListener;
 
 class FireBase
 {
-    private DatabaseReference mDatabase;
+    private static DatabaseReference mDatabase;
     String users[] = {"admin", "faculty", "hod", "student"};
-    private DataSnapshot ds;
+    private static DataSnapshot ds;
 
     FireBase()
     {
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
         mDatabase.addValueEventListener(new ValueEventListener()
         {
             @Override
@@ -28,30 +30,43 @@ class FireBase
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
-
             }
         });
     }
 
 
-    public void setUser(String userType, String userName, String password)
+    //To add any of the users to the database
+    static void setUser(String userType, String userName, String password)
     {
         mDatabase.child(userType).child(userName).setValue(password);
     }
 
 
-    String getPassword(String userType, String userName)
+    //adding details of student to firebase
+    static void setStudent(String userName, String password)
+    {
+        mDatabase.child("student").child(userName).setValue(password);
+    }
+
+
+    //adding details of faculty to firebase
+    static void setFaculty(String userName, String subject, String password)
+    {
+        mDatabase.child("faculty").child(userName).child("subject").setValue(subject);
+        mDatabase.child("faculty").child(userName).child("password").setValue(password);
+    }
+
+    static String getPassword(String userType, String userName)
     {
         try
         {
             return ds.child(userType).child(userName).getValue(String.class);
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             Log.d("AUTHENTICATION error:", e.toString());
         }
-
         return "";
     }
 }
+
 

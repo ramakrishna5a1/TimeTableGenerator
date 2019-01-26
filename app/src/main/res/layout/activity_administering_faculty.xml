@@ -7,10 +7,10 @@
     android:padding="5dp">
 
     <Button
-        android:id="@+id/upload_file"
+        android:id="@+id/faculty_upload_file"
+        style="@style/button_style"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/login_view_height"
-        style="@style/button_style"
         android:drawableStart="@drawable/upload_file"
         android:drawablePadding="5dp"
         android:gravity="center"
@@ -26,36 +26,43 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:padding="10dp"
         android:gravity="center"
+        android:padding="10dp"
         android:text="@string/upload_file_or_manually_enter"
         android:textColor="@color/colorPrimary"
         android:textSize="15sp"
         android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/faculty_id"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/login_view_height"
-            android:backgroundTint="@color/edit_text_line" />
+    <EditText
+        android:id="@+id/faculty_id"
+        android:hint="@string/user_id"
+        android:layout_width="@dimen/edit_text_width"
+        android:layout_height="@dimen/login_view_height"
+        android:backgroundTint="@color/edit_text_line"
+        android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/faculty_password"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/login_view_height"
-            android:backgroundTint="@color/edit_text_line" />
+    <EditText
+        android:id="@+id/faculty_subject"
+        android:layout_width="@dimen/edit_text_width"
+        android:layout_height="@dimen/login_view_height"
+        android:hint="@string/subject"
+        android:backgroundTint="@color/edit_text_line"
+        android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/faculty_subject"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/login_view_height"
-            android:backgroundTint="@color/edit_text_line" />
+    <EditText
+        android:id="@+id/faculty_password"
+        android:layout_width="@dimen/edit_text_width"
+        android:layout_height="@dimen/login_view_height"
+        android:hint="@string/password"
+        android:backgroundTint="@color/edit_text_line"
+        android:inputType="textPersonName" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/login_view_height"
+        android:id="@+id/register_faculty"
         style="@style/button_style"
+        android:layout_width="@dimen/edit_text_width"
+        android:layout_height="@dimen/login_view_height"
         android:background="@drawable/button_shape"
-        android:text="Register"
+        android:text="@string/register"
         android:textColor="@color/colorPrimary" />
 </LinearLayout>

@@ -7,13 +7,13 @@
     android:padding="5dp">
 
     <Button
+        android:id="@+id/student_upload_file"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/login_view_height"
         android:background="@drawable/button_shape"
         android:drawableStart="@drawable/upload_file"
         android:drawablePadding="5dp"
         android:gravity="center"
-        android:onClick="uploadFile"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:text="@string/upload_file"
@@ -33,19 +33,23 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/student_roll"
-        android:layout_width="match_parent"
+        android:id="@+id/student_id"
+        android:layout_width="@dimen/edit_text_width"
         android:layout_height="@dimen/login_view_height"
+        android:hint="@string/user_id"
         android:backgroundTint="@color/edit_text_line" />
 
     <EditText
         android:id="@+id/student_password"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/edit_text_width"
+        android:hint="@string/password"
         android:layout_height="@dimen/login_view_height"
         android:backgroundTint="@color/edit_text_line" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_top"
+        android:id="@+id/register_student"
+        android:layout_width="@dimen/edit_text_width"
         android:layout_height="@dimen/login_view_height"
         android:background="@drawable/button_shape"
         android:text="Register" />

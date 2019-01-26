@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.Serializable;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
@@ -34,7 +36,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         etPassword = findViewById(R.id.password);
 
         fireBase = new FireBase();
-        fireBase.setUser(users[1],"sir1","1");
 
         ArrayAdapter<String> aa = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, users);
         spin.setAdapter(aa);

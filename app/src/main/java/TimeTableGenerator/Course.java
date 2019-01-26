@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Course {
-    
 	//represents each course
 	
 	private int courseID;
@@ -19,6 +18,7 @@ public class Course {
 	public void setCombinations(ArrayList<Combination> combinations) {
 		this.combinations = combinations;
 	}
+
 	private ArrayList<StudentGroups> studentGroups=new ArrayList<StudentGroups>();
 	
 	public ArrayList<StudentGroups> getStudentGroups() {
