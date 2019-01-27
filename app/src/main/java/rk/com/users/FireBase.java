@@ -35,14 +35,14 @@ class FireBase
     }
 
 
-    //To add any of the users to the database
+    //To add any other users to the database
     static void setUser(String userType, String userName, String password)
     {
         mDatabase.child(userType).child(userName).setValue(password);
     }
 
 
-    //adding details of student to firebase
+    //adding details of student to database
     static void setStudent(String userName, String password)
     {
         mDatabase.child("student").child(userName).setValue(password);
@@ -56,7 +56,16 @@ class FireBase
         mDatabase.child("faculty").child(userName).child("password").setValue(password);
     }
 
-    static String getPassword(String userType, String userName)
+
+    static void changeDatabasePassword(String userType, String userTd, String password)
+    {
+        if (userType.equals("faculty"))
+            mDatabase.child("faculty").child(userTd).child("password").setValue(password);
+        else mDatabase.child(userType).child(userTd).setValue(password);
+    }
+
+
+    static String getStudentPassword(String userType, String userName)
     {
         try
         {
@@ -65,6 +74,20 @@ class FireBase
         {
             Log.d("AUTHENTICATION error:", e.toString());
         }
+        return "";
+    }
+
+
+    static String getFacultyPassword(String userName)
+    {
+        try
+        {
+            return ds.child("faculty").child(userName).child("password").getValue(String.class);
+        } catch (Exception e)
+        {
+            Log.d("AUTHENTICATION error:", e.toString());
+        }
+
         return "";
     }
 }

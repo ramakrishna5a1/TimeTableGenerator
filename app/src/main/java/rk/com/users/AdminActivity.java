@@ -14,7 +14,6 @@ public class AdminActivity extends AppCompatActivity
 {
 
     ViewPager page;
-    private static final int REQUEST_TAKE_GALLERY_VIDEO = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

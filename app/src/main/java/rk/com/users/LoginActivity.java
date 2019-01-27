@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,15 +12,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.io.Serializable;
-
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     final String users[] = {"Login Type", "admin", "student", "faculty", "HOD"};
     Spinner spin;
 
     EditText etUserName, etPassword;
-    String userName, password, userType = " ";
+    private String userType = " ",databasePassword;
 
     FireBase fireBase;
 
@@ -50,46 +47,54 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     /**
      * This method will execute whenever user press the submit button during login
      * It checks for the internet connection and the fields are empty or not before login.
-     *
-     * @param view
-     * @return void
-     */
+     **/
 
-    public void userLogin(View view)throws Exception
+    public void userLogin(View view)
     {
         if (ConnectionCheck.connection)
         {
-            userName = etUserName.getText().toString();
-            password = etPassword.getText().toString();
+            String userName = etUserName.getText().toString();
+            String password = etPassword.getText().toString();
 
             if (userType.equals("Login Type"))
             {
                 Toast.makeText(this, "Choose Login Type", Toast.LENGTH_LONG).show();
             } else if (!userName.equals("") && !password.equals(""))
             {
-                String pass2 = fireBase.getPassword(userType, userName);
+                //retrieving the password from database based on the user type
+                if (userType.equals("faculty"))
+                {
+                    databasePassword= FireBase.getFacultyPassword(userName);
+                }else
+                    databasePassword= FireBase.getStudentPassword(userType, userName);
 
-                //login code here
-                if (password.equals(pass2))
+
+
+                if (password.equals(databasePassword))
                 {
                     switch (userType)
                     {
                         case "admin":
-                                startActivity(new Intent(this, AdminActivity.class));
+                            startActivity(new Intent(this, AdminActivity.class));
                             break;
 
                         case "faculty":
-                            Intent facultyIntent=new Intent(this,FacultyActivity.class);
-                            facultyIntent.putExtra("userId",userName);
+                            Intent facultyIntent = new Intent(this, FacultyActivity.class);
+
+                            facultyIntent.putExtra("userId", userName);
+                            facultyIntent.putExtra("password", password);
                             startActivity(facultyIntent);
                             break;
 
                         case "student":
-                            Intent studentIntent=new Intent(this,StudentActivity.class);
-                            studentIntent.putExtra("userId",userName);
+                            Intent studentIntent = new Intent(this, StudentActivity.class);
+                            studentIntent.putExtra("userId", userName);
+                            studentIntent.putExtra("password", password);
+
                             startActivity(studentIntent);
                             break;
                     }
+
                     Toast.makeText(this, "Login success..", Toast.LENGTH_LONG).show();
 
                 } else
@@ -118,3 +123,4 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         // Another interface callback
     }
 }
+
