@@ -36,15 +36,16 @@ public class StudentActivity extends AppCompatActivity
 
     public void viewTimeTable(View view)
     {
-        Toast.makeText(this, "not implemented", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "under implementation...", Toast.LENGTH_LONG).show();
+        startActivity(new Intent(this, ShowTimeTable.class));
     }
 
     public void changePassword(View view)
     {
-        changePassword(StudentActivity.this,"student",userId,password);
+        changePassword(StudentActivity.this, "student", userId, password);
     }
 
-    public void changePassword( final Context context,final String userType,final String userId,final String password)
+    public void changePassword(final Context context, final String userType, final String userId, final String password)
     {
         final boolean[] ok = {true};
         final int ids[] = {R.id.old_password, R.id.new_password, R.id.confirm_password};
@@ -53,12 +54,13 @@ public class StudentActivity extends AppCompatActivity
 
         AlertDialog.Builder changePasswordDialog = new AlertDialog.Builder(context);
 
-        LayoutInflater changePasswordLayout = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater changePasswordLayout = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         final View changePasswordLayoutView = changePasswordLayout.inflate(R.layout.change_password_dialog, null);
         Button changePassword = changePasswordLayoutView.findViewById(R.id.change_password);
 
+
         changePasswordDialog.setView(changePasswordLayoutView);
-        AlertDialog myDialog = changePasswordDialog.create();
+        final AlertDialog myDialog = changePasswordDialog.create();
         myDialog.show();
 
         changePassword.setOnClickListener(new View.OnClickListener()
@@ -77,19 +79,17 @@ public class StudentActivity extends AppCompatActivity
                         Toast.makeText(context, "Enter all details...", Toast.LENGTH_LONG).show();
                     }
                 }
-
-                if (ConnectionCheck.connection)
+                if (ok[0] && ConnectionCheck.connection)
                 {
-                    if (ok[0] && !password.equals(passwords[0]))
+                    if (!password.equals(passwords[0]))
                     {
                         Toast.makeText(context, "Old password incorrect", Toast.LENGTH_LONG).show();
                     } else if (passwords[1].equals(passwords[2]))
                     {
-                        FireBase.changeDatabasePassword(userType,userId,passwords[1]);
-
+                        FireBase.changeDatabasePassword(userType, userId, passwords[1]);
+                        myDialog.cancel();
                     } else
                         Toast.makeText(context, "Password mismatch...", Toast.LENGTH_LONG).show();
-
                 } else
                     Toast.makeText(context, "No internet connection...", Toast.LENGTH_LONG).show();
 

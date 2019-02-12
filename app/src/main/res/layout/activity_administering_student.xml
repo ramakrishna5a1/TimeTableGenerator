@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/layout_background"
+    android:background="@drawable/layout_background"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="5dp">
@@ -37,6 +37,7 @@
         android:layout_width="@dimen/edit_text_width"
         android:layout_height="@dimen/login_view_height"
         android:hint="@string/user_id"
+        android:inputType="textPersonName"
         android:backgroundTint="@color/edit_text_line" />
 
     <EditText
@@ -44,6 +45,8 @@
         android:layout_width="@dimen/edit_text_width"
         android:hint="@string/password"
         android:layout_height="@dimen/login_view_height"
+        android:inputType="textVisiblePassword"
+        android:text="@string/time_table"
         android:backgroundTint="@color/edit_text_line" />
 
     <Button

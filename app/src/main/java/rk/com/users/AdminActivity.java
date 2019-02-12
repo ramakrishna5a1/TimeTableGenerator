@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +25,12 @@ public class AdminActivity extends AppCompatActivity
         page = findViewById(R.id.pager);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
+        adapter.addFragment(new AdministeringHOD(), "HOD");
         adapter.addFragment(new AdministeringFaculty(), "faculty");
         adapter.addFragment(new AdministeringStudent(), "student");
 
-
         page.setAdapter(adapter);
         TabLayout tabLayout = findViewById(R.id.tabs);
-
         tabLayout.setupWithViewPager(page);
     }
 

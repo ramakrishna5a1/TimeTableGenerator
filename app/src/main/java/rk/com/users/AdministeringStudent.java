@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import static android.app.Activity.RESULT_OK;
 
 
@@ -43,7 +44,8 @@ public class AdministeringStudent extends Fragment
             @Override
             public void onClick(View v)
             {
-                readDataFile();
+                Toast.makeText(getContext(), "not implemented", Toast.LENGTH_SHORT).show();
+                //readDataFile();
             }
         });
 
@@ -53,7 +55,7 @@ public class AdministeringStudent extends Fragment
             @Override
             public void onClick(View v)
             {
-                if(ConnectionCheck.connection)//checking internet connection.
+                if (ConnectionCheck.connection)//checking internet connection.
                 {
                     String studentId, studentPassword;
 
@@ -67,8 +69,8 @@ public class AdministeringStudent extends Fragment
                     {
                         FireBase.setStudent(studentId, studentPassword);
                     }
-                }
-                else{
+                } else
+                {
                     Toast.makeText(getContext(), "No internet..", Toast.LENGTH_LONG).show();
                 }
 
@@ -80,17 +82,15 @@ public class AdministeringStudent extends Fragment
 
     public void readDataFile()
     {
-        Toast.makeText(getContext(),"not implemented", Toast.LENGTH_SHORT).show();
-        /*
+
         Intent textFileRead = new Intent();
         textFileRead.addCategory(Intent.CATEGORY_OPENABLE);
 
-        textFileRead.setType("pdf/*");
+        textFileRead.setType("*/*");
 
         textFileRead.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(textFileRead, "Select File"), REQUEST_TAKE_GALLERY_VIDEO);
 
-    */
     }
 
     @Override

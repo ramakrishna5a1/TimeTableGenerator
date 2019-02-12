@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     final String users[] = {"Login Type", "admin", "student", "faculty", "HOD"};
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         etPassword = findViewById(R.id.password);
 
         fireBase = new FireBase();
+
 
         ArrayAdapter<String> aa = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, users);
         spin.setAdapter(aa);
@@ -95,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                             break;
                     }
 
-                    Toast.makeText(this, "Login success..", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Login success..", Toast.LENGTH_SHORT).show();
 
                 } else
                 {

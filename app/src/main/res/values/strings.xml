@@ -12,9 +12,11 @@
     <string name="old_password">Old password</string>
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="subject">Subject</string>
+    <string name="course">Subject</string>
     <string name="register">Register</string>
     <string name="change">change</string>
     <string name="request_leave">Request Leave</string>
+    <string name="leaves">leaves</string>
+    <string name="generate_time_table">Generate Time Table</string>
 
 </resources>

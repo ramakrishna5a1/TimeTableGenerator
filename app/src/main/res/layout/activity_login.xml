@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/layout_background"
+    android:background="@drawable/layout_background"
     android:gravity="center">
 
     <LinearLayout
@@ -26,6 +26,7 @@
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="@dimen/login_view_height"
+            android:scrollbarStyle="insideOverlay"
             android:layout_marginTop="@dimen/margin_top"
             android:backgroundTint="@color/edit_text_line" />
 
@@ -42,7 +43,8 @@
                 android:layout_height="@dimen/login_view_height"
                 android:hint="@string/user_id"
                 android:inputType="textPersonName"
-                android:textAllCaps="true" />
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -60,6 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_view_height"
                 android:hint="@string/password"
+                android:textColor="@color/colorPrimaryDark"
                 android:inputType="textPassword"
                 android:textAllCaps="true" />
 

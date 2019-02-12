@@ -5,15 +5,23 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="Department Of"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/display_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text=""
+        android:text="Computer Science"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <Button
@@ -21,8 +29,8 @@
         android:layout_width="@dimen/edit_text_width"
         android:layout_height="@dimen/login_view_height"
         android:layout_marginTop="35dp"
-        android:onClick="viewTimeTable"
-        android:text="@string/view_timetable"
+        android:text="@string/leaves"
+        android:onClick="acceptRejectLeaves"
         android:textAllCaps="false" />
 
     <Button
@@ -30,8 +38,17 @@
         android:layout_width="@dimen/edit_text_width"
         android:layout_height="@dimen/login_view_height"
         android:layout_marginTop="35dp"
-        android:onClick="changePassword"
-        android:text="@string/change_password"
+        android:onClick="generateTimeTable"
+        android:text="@string/generate_time_table"
+        android:textAllCaps="false" />
+
+    <Button
+        style="@style/button_style"
+        android:layout_width="@dimen/edit_text_width"
+        android:layout_height="@dimen/login_view_height"
+        android:layout_marginTop="35dp"
+        android:text="@string/view_timetable"
+        android:onClick="viewTimeTable"
         android:textAllCaps="false" />
 
 </LinearLayout>

@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
+    android:gravity="center"
+    android:onClick="gotoLogin"
+    android:orientation="vertical">
+
+    <ImageView android:layout_height="200dp"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/time_table_generator"/>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/display_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:text="@string/app_name"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
+
+
