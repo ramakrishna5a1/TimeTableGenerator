@@ -3,16 +3,16 @@ package com.rk.timetable;
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
-public class GeneticAlgorithm
+class GeneticAlgorithm
 {
     private Data data;
 
-    public GeneticAlgorithm(Data data)
+    GeneticAlgorithm(Data data)
     {
         this.data = data;
     }
 
-    public Population evolve(Population population)
+    Population evolve(Population population)
     {
         return mutatePopulation(crossOverPopulation(population));
     }

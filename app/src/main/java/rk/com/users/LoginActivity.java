@@ -15,11 +15,11 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
-    final String users[] = {"Login Type", "admin", "student", "faculty", "HOD"};
+    final String users[] = {"Login Type", "HOD", "admin", "student", "faculty"};
     Spinner spin;
 
     EditText etUserName, etPassword;
-    private String userType = " ",databasePassword;
+    private String userType = " ", databasePassword;
 
     FireBase fireBase;
 
@@ -64,13 +64,10 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             } else if (!userName.equals("") && !password.equals(""))
             {
                 //retrieving the password from database based on the user type
-                if (userType.equals("faculty"))
-                {
-                    databasePassword= FireBase.getFacultyPassword(userName);
-                }else
-                    databasePassword= FireBase.getStudentPassword(userType, userName);
-
-
+                if (userType.equals("student") || userType.equals("HOD") || userType.equals("admin"))
+                    databasePassword = FireBase.getPassword(userType,userName);
+                else if (userType.equals("faculty"))
+                    databasePassword = FireBase.getFacultyPassword(userName);
 
                 if (password.equals(databasePassword))
                 {
@@ -78,6 +75,14 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                     {
                         case "admin":
                             startActivity(new Intent(this, AdminActivity.class));
+                            break;
+
+                        case "HOD":
+                            Intent hodIntent = new Intent(this, HODActivity.class);
+                            hodIntent.putExtra("userId", userName);
+                            hodIntent.putExtra("password", password);
+
+                            startActivity(hodIntent);
                             break;
 
                         case "faculty":
@@ -96,6 +101,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                             startActivity(studentIntent);
                             break;
                     }
+
+                    etUserName.setText("");
+                    etPassword.setText("");
 
                     Toast.makeText(this, "Login success..", Toast.LENGTH_SHORT).show();
 

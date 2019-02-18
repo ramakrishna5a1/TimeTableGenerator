@@ -36,13 +36,22 @@ public class StudentActivity extends AppCompatActivity
 
     public void viewTimeTable(View view)
     {
-        Toast.makeText(this, "under implementation...", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, ShowTimeTable.class));
+
+        if (true)
+        {
+            //Toast.makeText(this, "under implementation...", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, ShowTimeTable.class));
+        } else
+        {
+            Toast.makeText(this, "No data found", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void changePassword(View view)
     {
         changePassword(StudentActivity.this, "student", userId, password);
+        Toast.makeText(this,"Password changed Login again",Toast.LENGTH_SHORT).show();
+        //finish();
     }
 
     public void changePassword(final Context context, final String userType, final String userId, final String password)
@@ -57,7 +66,6 @@ public class StudentActivity extends AppCompatActivity
         LayoutInflater changePasswordLayout = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         final View changePasswordLayoutView = changePasswordLayout.inflate(R.layout.change_password_dialog, null);
         Button changePassword = changePasswordLayoutView.findViewById(R.id.change_password);
-
 
         changePasswordDialog.setView(changePasswordLayoutView);
         final AlertDialog myDialog = changePasswordDialog.create();
@@ -92,7 +100,6 @@ public class StudentActivity extends AppCompatActivity
                         Toast.makeText(context, "Password mismatch...", Toast.LENGTH_LONG).show();
                 } else
                     Toast.makeText(context, "No internet connection...", Toast.LENGTH_LONG).show();
-
             }
         });
     }

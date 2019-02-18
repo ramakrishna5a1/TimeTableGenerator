@@ -1,5 +1,6 @@
 package rk.com.users;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +11,7 @@ public class ConnectionCheck extends BroadcastReceiver
 {
     static boolean connection;
 
+    @SuppressLint("UnsafeProtectedBroadcastReceiver")
     @Override
     public void onReceive(Context context, Intent intent)
     {

@@ -26,14 +26,15 @@
             style="@style/Widget.AppCompat.Spinner.Underlined"
             android:layout_width="match_parent"
             android:layout_height="@dimen/login_view_height"
-            android:scrollbarStyle="insideOverlay"
             android:layout_marginTop="@dimen/margin_top"
-            android:backgroundTint="@color/edit_text_line" />
+            android:backgroundTint="@color/edit_text_line"
+            android:scrollbarStyle="insideOverlay" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top"
+            android:backgroundTint="@color/edit_text_line"
             android:gravity="center"
             app:hintTextAppearance="@style/toggle_text">
 
@@ -41,10 +42,11 @@
                 android:id="@+id/user_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_view_height"
+                android:backgroundTint="@color/edit_text_line"
                 android:hint="@string/user_id"
                 android:inputType="textPersonName"
                 android:textAllCaps="true"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textColor="@color/colorPrimaryDark" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -61,12 +63,24 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_view_height"
+
+                android:backgroundTint="@color/edit_text_line"
                 android:hint="@string/password"
-                android:textColor="@color/colorPrimaryDark"
                 android:inputType="textPassword"
-                android:textAllCaps="true" />
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimaryDark" />
 
         </android.support.design.widget.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/remember_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:layout_marginTop="@dimen/margin_top"
+            android:buttonTint="@color/colorPrimary"
+            android:text="Remember sign in."
+            android:textColor="@color/colorPrimaryDark" />
 
         <Button
             style="@style/button_style"

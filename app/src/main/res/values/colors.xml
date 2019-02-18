@@ -6,4 +6,6 @@
     <color name="layout_background">#E6E9FAF6</color>
     <color name="edit_text_line">#029C8E</color>
     <color name="button_color">#2c008577</color>
+    <color name="table_cell_color">#0A008577</color>
+    <color name="table_text_color">#020202</color>
 </resources>

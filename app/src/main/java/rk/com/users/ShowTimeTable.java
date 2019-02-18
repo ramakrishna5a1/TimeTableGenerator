@@ -1,15 +1,40 @@
 package rk.com.users;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 public class ShowTimeTable extends AppCompatActivity
 {
 
+    int ids[][] = {{R.id.cell_11, R.id.cell_12, R.id.cell_13, R.id.cell_14, R.id.cell_15, R.id.cell_16, R.id.cell_17},
+            {R.id.cell_21, R.id.cell_22, R.id.cell_23, R.id.cell_24, R.id.cell_25, R.id.cell_26, R.id.cell_27},
+            {R.id.cell_31, R.id.cell_32, R.id.cell_33, R.id.cell_34, R.id.cell_35, R.id.cell_36, R.id.cell_37},
+            {R.id.cell_41, R.id.cell_42, R.id.cell_43, R.id.cell_44, R.id.cell_45, R.id.cell_46, R.id.cell_47},
+            {R.id.cell_51, R.id.cell_52, R.id.cell_53, R.id.cell_54, R.id.cell_55, R.id.cell_56, R.id.cell_57},
+            {R.id.cell_61, R.id.cell_62, R.id.cell_63, R.id.cell_64, R.id.cell_65, R.id.cell_66, R.id.cell_67},};
+
+    TextView tableCellViews[][] = new TextView[6][7];
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        int i, j;
+        //sample data
+        String timeTableData[][] = {{"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}};
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_time_table);
+
+        //finding the each cell of the table
+        for (i = 0; i < 6; i++)
+            for (j = 0; j < 7; j++)
+                tableCellViews[i][j] = findViewById(ids[i][j]);
+
+        //setting text to each cell
+        for (i = 0; i < 6; i++)
+            for (j = 0; j < 7; j++)
+                tableCellViews[i][j].setText(timeTableData[i][j]);
     }
 }
+

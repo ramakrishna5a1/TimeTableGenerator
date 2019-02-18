@@ -18,5 +18,8 @@
     <string name="request_leave">Request Leave</string>
     <string name="leaves">leaves</string>
     <string name="generate_time_table">Generate Time Table</string>
+    <string name="department_of">Department Of</string>
+    <string name="department">Computer Science</string>
+    <string name="department_name">Department Name</string>
 
 </resources>

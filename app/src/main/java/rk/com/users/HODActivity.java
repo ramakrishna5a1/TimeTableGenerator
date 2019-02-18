@@ -27,8 +27,16 @@ public class HODActivity extends AppCompatActivity
 
     public void viewTimeTable(View view)
     {
-        Toast.makeText(this, "under implementation...", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this, ShowTimeTable.class));
-
+        if (true)
+        {
+            //Toast.makeText(this, "under implementation...", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, ShowTimeTable.class));
+        }
+        else
+        {
+            Toast.makeText(this, "No data found", Toast.LENGTH_LONG).show();
+        }
     }
 }
+
+
