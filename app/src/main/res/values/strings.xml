@@ -21,5 +21,7 @@
     <string name="department_of">Department Of</string>
     <string name="department">Computer Science</string>
     <string name="department_name">Department Name</string>
+    <string name="faculty_name">Faculty Name</string>
+    <string name="available_faculty">Available Faculty</string>
 
 </resources>

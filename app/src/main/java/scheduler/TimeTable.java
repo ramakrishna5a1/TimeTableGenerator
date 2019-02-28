@@ -11,9 +11,9 @@ public class TimeTable {
 		int k = 0;
 		int subjectno = 0;
 		int hourcount = 1;
-		int days = inputdata.daysperweek;
-		int hours = inputdata.hoursperday;
-		int nostgrp = inputdata.nostudentgroup;
+		int days = InputData.daysperweek;
+		int hours = InputData.hoursperday;
+		int nostgrp = InputData.nostudentgroup;
 
 		// creating as many slots as the no of blocks in overall timetable
 		slot = new Slot[hours * days * nostgrp];
@@ -25,18 +25,18 @@ public class TimeTable {
 			// for every slot in a week for a student group
 			for (int j = 0; j < hours * days; j++) {
 
-				StudentGroup sg = inputdata.studentgroup[i];
+				StudentGroup sg = InputData.studentgroup[i];
 
 				// if all subjects have been assigned required hours we give
 				// free periods
-				if (subjectno >= sg.nosubject) {
+				if (subjectno >= sg.noSubject) {
 					slot[k++] = null;
 				}
 
 				// if not we create new slots
 				else {
 
-					slot[k++] = new Slot(sg, sg.teacherid[subjectno], sg.subject[subjectno]);
+					slot[k++] = new Slot(sg, sg.teacherId[subjectno], sg.subject[subjectno]);
 
 					// suppose java has to be taught for 5 hours then we make 5
 					// slots for java, we keep track through hourcount

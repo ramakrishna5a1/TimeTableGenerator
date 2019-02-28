@@ -7,8 +7,8 @@ import java.io.*;
 public class Gene implements Serializable{
 
 	public int slotno[];
-	int days=inputdata.daysperweek;
-	int hours=inputdata.hoursperday;
+	int days= InputData.daysperweek;
+	int hours= InputData.hoursperday;
 	
 	Random r=new Random();
 	

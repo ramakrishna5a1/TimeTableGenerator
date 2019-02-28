@@ -3,8 +3,8 @@ package scheduler;
 //slot is single block of timetable
 
 public class Slot{
-	public StudentGroup studentgroup;
-	public int teacherid;
+	StudentGroup studentgroup;
+	int teacherid;
 	public String subject;
 	
 	//non parametrized constructor for allowing free periods

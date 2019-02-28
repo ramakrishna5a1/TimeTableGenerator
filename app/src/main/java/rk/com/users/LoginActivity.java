@@ -2,6 +2,7 @@ package rk.com.users;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +16,9 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
-    final String users[] = {"Login Type", "HOD", "admin", "student", "faculty"};
+    final String users[] = {"Login Type", "admin", "HOD", "faculty", "student"};
     Spinner spin;
+
 
     EditText etUserName, etPassword;
     private String userType = " ", databasePassword;
@@ -65,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             {
                 //retrieving the password from database based on the user type
                 if (userType.equals("student") || userType.equals("HOD") || userType.equals("admin"))
-                    databasePassword = FireBase.getPassword(userType,userName);
+                    databasePassword = FireBase.getPassword(userType, userName);
                 else if (userType.equals("faculty"))
                     databasePassword = FireBase.getFacultyPassword(userName);
 

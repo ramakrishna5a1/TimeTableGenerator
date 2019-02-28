@@ -3,9 +3,13 @@ package rk.com.users;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import scheduler.Chromosome;
 
 public class ShowTimeTable extends AppCompatActivity
 {
+
 
     int ids[][] = {{R.id.cell_11, R.id.cell_12, R.id.cell_13, R.id.cell_14, R.id.cell_15, R.id.cell_16, R.id.cell_17},
             {R.id.cell_21, R.id.cell_22, R.id.cell_23, R.id.cell_24, R.id.cell_25, R.id.cell_26, R.id.cell_27},
@@ -16,16 +20,22 @@ public class ShowTimeTable extends AppCompatActivity
 
     TextView tableCellViews[][] = new TextView[6][7];
 
+    public static String[][] timeTableData = {{"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}};
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         int i, j;
         //sample data
-        String timeTableData[][] = {{"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}};
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_time_table);
 
+        if(timeTableData[0][0].equals("0")){
+            Toast.makeText(this, "No Timetable published", Toast.LENGTH_SHORT).show();
+            finish();
+        }
         //finding the each cell of the table
         for (i = 0; i < 6; i++)
             for (j = 0; j < 7; j++)

@@ -28,6 +28,9 @@
             android:name=".HODActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".FacultyActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".SplashScreen"
             android:screenOrientation="portrait">
 
@@ -57,9 +60,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".AdministeringFaculty"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".FacultyActivity"
             android:screenOrientation="portrait" />
     </application>
 

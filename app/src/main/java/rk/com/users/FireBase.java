@@ -11,25 +11,47 @@ import com.google.firebase.database.ValueEventListener;
 
 class FireBase
 {
-    private static DatabaseReference mDatabase;
+    private static DatabaseReference wholeDatabaseReference;
+
+    private static DatabaseReference facultyDataReference;
+    protected static DataSnapshot facultyDataSnapshot;
+
     String users[] = {"admin", "faculty", "hod", "student"};
-    private static DataSnapshot ds;
+    private static DataSnapshot totalDataSnapshot;
 
     FireBase()
     {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase.addValueEventListener(new ValueEventListener()
+        wholeDatabaseReference = FirebaseDatabase.getInstance().getReference();
+
+        wholeDatabaseReference.addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                ds = dataSnapshot;
+                totalDataSnapshot = dataSnapshot;
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError)
             {
+            }
+        });
+
+        facultyDataReference=FirebaseDatabase.getInstance().getReference().child("faculty");
+
+        facultyDataReference.addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+                facultyDataSnapshot=dataSnapshot;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+
             }
         });
     }
@@ -38,58 +60,51 @@ class FireBase
     //To add any other users to the database
     static void setUser(String userType, String userName, String password)
     {
-        mDatabase.child(userType).child(userName).setValue(password);
+        wholeDatabaseReference.child(userType).child(userName).setValue(password);
     }
 
 
     //adding details of HOD to database
     static void setHOD(String userName, String password)
     {
-        mDatabase.child("HOD").child(userName).setValue(password);
+        wholeDatabaseReference.child("HOD").child(userName).setValue(password);
     }
 
+    static void leaveData(String userName, String data)
+    {
+
+    }
 
     //adding details of student to database
     static void setStudent(String userName, String password)
     {
-        mDatabase.child("student").child(userName).setValue(password);
+        wholeDatabaseReference.child("student").child(userName).setValue(password);
     }
 
 
     //adding details of faculty to database
-    static void setFaculty(String userName, String subject, String password)
+    static void setFaculty(String userName,String name, String subject, String password)
     {
-        mDatabase.child("faculty").child(userName).child("subject").setValue(subject);
-        mDatabase.child("faculty").child(userName).child("password").setValue(password);
-    }
 
+        wholeDatabaseReference.child("faculty").child(userName).child("name").setValue(name);
+        wholeDatabaseReference.child("faculty").child(userName).child("subject").setValue(subject);
+        wholeDatabaseReference.child("faculty").child(userName).child("password").setValue(password);
+        //wholeDatabaseReference.child("faculty").child(userName).child("leaveStatus").setValue("no");
+    }
 
     static void changeDatabasePassword(String userType, String userTd, String password)
     {
         if (userType.equals("faculty"))
-            mDatabase.child("faculty").child(userTd).child("password").setValue(password);
-        else mDatabase.child(userType).child(userTd).setValue(password);
+            wholeDatabaseReference.child("faculty").child(userTd).child("password").setValue(password);
+        else wholeDatabaseReference.child(userType).child(userTd).setValue(password);
     }
 
     //getting the password from the database for userType admin,HOD,student
-    static String getPassword(String userType,String userName)
+    static String getPassword(String userType, String userName)
     {
         try
         {
-            return ds.child(userType).child(userName).getValue(String.class);
-        } catch (Exception e)
-        {
-            Log.d("AUTHENTICATION error:", e.toString());
-        }
-        return "";
-    }
-
-
-    static String getStudentPassword(String userName)
-    {
-        try
-        {
-            return ds.child("student").child(userName).getValue(String.class);
+            return totalDataSnapshot.child(userType).child(userName).getValue(String.class);
         } catch (Exception e)
         {
             Log.d("AUTHENTICATION error:", e.toString());
@@ -102,11 +117,18 @@ class FireBase
     {
         try
         {
-            return ds.child("faculty").child(userName).child("password").getValue(String.class);
+            return totalDataSnapshot.child("faculty").child(userName).child("password").getValue(String.class);
         } catch (Exception e)
         {
             Log.d("AUTHENTICATION error:", e.toString());
         }
+
+        return "";
+    }
+
+    //leave related operations are performed through this function\\
+    static String leaves(String userId, String data)
+    {
 
         return "";
     }

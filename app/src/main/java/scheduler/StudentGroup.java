@@ -4,14 +4,14 @@ public class StudentGroup {
 	public int id;
 	public String name;
 	public String[] subject;
-	public int nosubject;
-	public int teacherid[];
-	public int[] hours;
+	int noSubject;
+	int teacherId[];
+	int[] hours;
 	
-	public StudentGroup() {
+	StudentGroup() {
 		subject=new String[10];
 		hours=new int[10];
-		teacherid=new int[10];
+		teacherId =new int[10];
 	}
 	
 	public int getId() {
@@ -32,18 +32,17 @@ public class StudentGroup {
 	public void setSubject(String[] subject) {
 		this.subject = subject;
 	}
-	public int getNosubject() {
-		return nosubject;
+	public int getNoSubject() {
+		return noSubject;
 	}
-	public void setNosubject(String snosubject) {
-		int nosubject=Integer.parseInt(snosubject);
-		this.nosubject = nosubject;
+	public void setNoSubject(String snosubject) {
+		this.noSubject = Integer.parseInt(snosubject);
 	}
-	public int[] getTeacherid() {
-		return teacherid;
+	public int[] getTeacherId() {
+		return teacherId;
 	}
-	public void setTeacherid(int[] teacherid) {
-		this.teacherid = teacherid;
+	public void setTeacherId(int[] teacherId) {
+		this.teacherId = teacherId;
 	}
 	public int[] getHours() {
 		return hours;

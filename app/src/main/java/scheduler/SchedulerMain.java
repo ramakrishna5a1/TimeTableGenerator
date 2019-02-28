@@ -1,5 +1,8 @@
 package scheduler;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,33 +14,27 @@ public class SchedulerMain
     /*
      * Time Table scheduling is an np-hard problem which can best be solved
      * using Genetic Algorithms (of Artificial Intelligence).
-     * Conceps used here are Permutation encoding, elitism, roulette wheel selection,
+     * Concepts used here are Permutation encoding, elitism, roulette wheel selection,
      * single pt crossover,swap mutation
      */
 
-    private List<Chromosome> firstlist;
-    private List<Chromosome> newlist;
-    private double firstlistfitness;
-    private double newlistfitness;
-    private int populationsize = 1000;
-    private int maxgenerations = 100;
+    private List<Chromosome> firstList;
+    private double firstListFitness;
+    private int populationSize = 1000;
 
-    private static Chromosome finalson;
+    public int geneticOperations(Context c){
 
-    private SchedulerMain()
-    {
-
-        inputdata i = new inputdata();
-        i.takeinput();
+        InputData i = new InputData();
+        i.takeInput();
 
         //printing input data (on console for testing)
-        Utility.printInputData();
+        //Utility.printInputData();
 
         //generating slots
         new TimeTable();
 
         //printing slots (testing purpose only)
-        Utility.printSlots();
+        //Utility.printSlots();
 
         //initialising first generation of chromosomes and puting in first arraylist
         initialisePopulation();
@@ -45,8 +42,11 @@ public class SchedulerMain
         //generating newer generation of chromosomes using crossovers and mutation
         createNewGenerations();
 
-    }
+//        Toast.makeText(c,"Generated...",Toast.LENGTH_LONG).show();
 
+
+        return 1;
+    }
 
     //Creating new Generations using crossovers and mutations
     private void createNewGenerations()
@@ -59,34 +59,34 @@ public class SchedulerMain
         int nogenerations = 0;
 
         //looping max no of generations times or until suitable chromosome found
-        while (nogenerations < maxgenerations)
+        int maxGenerations = 100;
+        while (nogenerations < maxGenerations)
         {
 
-            newlist = new ArrayList<Chromosome>();
-            newlistfitness = 0;
+            List<Chromosome> newList = new ArrayList<Chromosome>();
+            double newListFitness = 0;
             int i = 0;
 
             //first 1/10 chromosomes added as it is- Elitism
-            for (i = 0; i < populationsize / 10; i++)
+            for (i = 0; i < populationSize / 10; i++)
             {
-                newlist.add(firstlist.get(i).deepClone());
-                newlistfitness += firstlist.get(i).getFitness();
+                newList.add(firstList.get(i).deepClone());
+                newListFitness += firstList.get(i).getFitness();
             }
 
             //adding other members after performing crossover and mutation
-            while (i < populationsize)
+            while (i < populationSize)
             {
+                father = selectParentRoulette(); //selectParentBest(newList);
+                mother = selectParentRoulette(); //selectParentBest(newList);
 
-                father = selectParentRoulette();
-                mother = selectParentRoulette();
 
                 //crossover
-                if (new Random().nextDouble() < inputdata.crossoverrate)
-                {
+                if (new Random().nextDouble() < InputData.crossoverrate)
                     son = crossover(father, mother);
-                } else son = father;
+                else son = father;
 
-                //mutation
+                //mutation customMutation()
                 customMutation(son);
 
 
@@ -97,65 +97,56 @@ public class SchedulerMain
                     break;
                 }
 
-                newlist.add(son);
-                newlistfitness += son.getFitness();
+                newList.add(son);
+                newListFitness += son.getFitness();
                 i++;
-
             }
 
             //if chromosome with fitness 1 found
-            if (i < populationsize)
+            if (i < populationSize)
             {
-
                 System.out.println("****************************************************************************************");
                 System.out.println("\n\nSuitable Timetable has been generated in the " + i + "th Chromosome of " + (nogenerations + 2) + " generation with fitness 1.");
                 System.out.println("\nGenerated Timetable is:");
                 son.printTimeTable();
-                finalson = son;
+                Chromosome finalSon = son;
                 break;
-
             }
 
             //if chromosome with required fitness not found in this generation
-            firstlist = newlist;
-            Collections.sort(newlist);
-            Collections.sort(firstlist);
+            firstList = newList;
+            Collections.sort(newList);
+            Collections.sort(firstList);
             System.out.println("**************************     Generation" + (nogenerations + 2) + "     ********************************************\n");
-            printGeneration(newlist);
+            printGeneration(newList);
             nogenerations++;
-
         }
     }
 
     //selecting using Roulette Wheel Selection only from the best 10% chromosomes
     private Chromosome selectParentRoulette()
     {
-
-        firstlistfitness /= 10;
-        double randomdouble = new Random().nextDouble() * firstlistfitness;
+        firstListFitness /= 10;
+        double randomdouble = new Random().nextDouble() * firstListFitness;
         double currentsum = 0;
         int i = 0;
 
         while (currentsum <= randomdouble)
-        {
-            currentsum += firstlist.get(i++).getFitness();
-        }
-        return firstlist.get(--i).deepClone();
+            currentsum += firstList.get(i++).getFitness();
 
+        return firstList.get(--i).deepClone();
     }
-
 
     //custom mutation
     private void customMutation(Chromosome c)
     {
 
         double newfitness = 0, oldfitness = c.getFitness();
-        int geneno = new Random().nextInt(inputdata.nostudentgroup);
+        int geneno = new Random().nextInt(InputData.nostudentgroup);
 
         int i = 0;
         while (newfitness < oldfitness)
         {
-
             //c.printChromosome();
             //System.out.println("getf="+c.getFitness()+" fit= "+c.fitness);
 
@@ -170,47 +161,39 @@ public class SchedulerMain
 
     }
 
-
     //Two point crossover
     private Chromosome crossover(Chromosome father, Chromosome mother)
     {
-
-        int randomint = new Random().nextInt(inputdata.nostudentgroup);
-        Gene temp = father.gene[randomint].deepClone();
-        father.gene[randomint] = mother.gene[randomint].deepClone();
-        mother.gene[randomint] = temp;
+        int randomInt = new Random().nextInt(InputData.nostudentgroup);
+        Gene temp = father.gene[randomInt].deepClone();
+        father.gene[randomInt] = mother.gene[randomInt].deepClone();
+        mother.gene[randomInt] = temp;
         if (father.getFitness() > mother.getFitness()) return father;
         else return mother;
-
     }
 
     //initialising first generation of population
     private void initialisePopulation()
     {
-
         //generating first generation of chromosomes and keeping them in an arraylist
-        firstlist = new ArrayList<Chromosome>();
-        firstlistfitness = 0;
+        firstList = new ArrayList<>();
+        firstListFitness = 0;
 
-        for (int i = 0; i < populationsize; i++)
+        for (int i = 0; i < populationSize; i++)
         {
-
             Chromosome c;
-            firstlist.add(c = new Chromosome());
-            firstlistfitness += c.fitness;
-
+            firstList.add(c = new Chromosome());
+            firstListFitness += c.fitness;
         }
-        Collections.sort(firstlist);
+        Collections.sort(firstList);
         System.out.println("----------Initial Generation-----------\n");
-        printGeneration(firstlist);
-
+        printGeneration(firstList);
     }
 
 
     //printing important details of a generation
     private void printGeneration(List<Chromosome> list)
     {
-
         System.out.println("Fetching details from this generation...\n");
 
         //to print only initial 4 chromosomes of sorted list
@@ -218,56 +201,47 @@ public class SchedulerMain
         {
             System.out.println("Chromosome no." + i + ": " + list.get(i).getFitness());
             list.get(i).printChromosome();
-            System.out.println("");
+            System.out.println();
         }
 
-        System.out.println("Chromosome no. " + (populationsize / 10 + 1) + " :" + list.get(populationsize / 10 + 1).getFitness() + "\n");
-        System.out.println("Chromosome no. " + (populationsize / 5 + 1) + " :" + list.get(populationsize / 5 + 1).getFitness() + "\n");
+        System.out.println("Chromosome no. " + (populationSize / 10 + 1) + " :" + list.get(populationSize / 10 + 1).getFitness() + "\n");
+        System.out.println("Chromosome no. " + (populationSize / 5 + 1) + " :" + list.get(populationSize / 5 + 1).getFitness() + "\n");
         System.out.println("Most fit chromosome from this generation has fitness = " + list.get(0).getFitness() + "\n");
-
     }
 
 
     //selecting from best chromosomes only(alternate to roulette wheel selection)
     public Chromosome selectParentBest(List<Chromosome> list)
     {
-
         Random r = new Random();
-        int randomint = r.nextInt(100);
-        return list.get(randomint).deepClone();
-
+        int randomInt = r.nextInt(100);
+        return list.get(randomInt).deepClone();
     }
-
 
     //simple Mutation operation
-    public void mutation(Chromosome c)
+    private void mutation(Chromosome c)
     {
-        int geneno = new Random().nextInt(inputdata.nostudentgroup);
-        int temp = c.gene[geneno].slotno[0];
-        for (int i = 0; i < inputdata.daysperweek * inputdata.hoursperday - 1; i++)
-        {
-            c.gene[geneno].slotno[i] = c.gene[geneno].slotno[i + 1];
-        }
-        c.gene[geneno].slotno[inputdata.daysperweek * inputdata.hoursperday - 1] = temp;
+        int geneNo = new Random().nextInt(InputData.nostudentgroup);
+        int temp = c.gene[geneNo].slotno[0];
+        if (InputData.daysperweek * InputData.hoursperday - 1 >= 0)
+            System.arraycopy(c.gene[geneNo].slotno, 1, c.gene[geneNo].slotno, 0, InputData.daysperweek * InputData.hoursperday - 1);
+        c.gene[geneNo].slotno[InputData.daysperweek * InputData.hoursperday - 1] = temp;
     }
-
 
     //swap mutation
     public void swapMutation(Chromosome c)
     {
+        int geneNo = new Random().nextInt(InputData.nostudentgroup);
+        int slotNo1 = new Random().nextInt(InputData.hoursperday * InputData.daysperweek);
+        int slotNo2 = new Random().nextInt(InputData.hoursperday * InputData.daysperweek);
 
-        int geneno = new Random().nextInt(inputdata.nostudentgroup);
-        int slotno1 = new Random().nextInt(inputdata.hoursperday * inputdata.daysperweek);
-        int slotno2 = new Random().nextInt(inputdata.hoursperday * inputdata.daysperweek);
-
-        int temp = c.gene[geneno].slotno[slotno1];
-        c.gene[geneno].slotno[slotno1] = c.gene[geneno].slotno[slotno2];
-        c.gene[geneno].slotno[slotno2] = temp;
+        int temp = c.gene[geneNo].slotno[slotNo1];
+        c.gene[geneNo].slotno[slotNo1] = c.gene[geneNo].slotno[slotNo2];
+        c.gene[geneNo].slotno[slotNo2] = temp;
     }
-
 
     public static void main(String[] args)
     {
-        new SchedulerMain();
+
     }
 }

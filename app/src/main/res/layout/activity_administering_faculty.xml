@@ -35,26 +35,34 @@
 
     <EditText
         android:id="@+id/faculty_id"
-        android:hint="@string/user_id"
         android:layout_width="@dimen/edit_text_width"
         android:layout_height="@dimen/login_view_height"
         android:backgroundTint="@color/edit_text_line"
+        android:hint="@string/user_id"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/faculty_name"
+        android:layout_width="@dimen/edit_text_width"
+        android:layout_height="@dimen/login_view_height"
+        android:backgroundTint="@color/edit_text_line"
+        android:hint="@string/faculty_name"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/faculty_subject"
         android:layout_width="@dimen/edit_text_width"
         android:layout_height="@dimen/login_view_height"
-        android:hint="@string/course"
         android:backgroundTint="@color/edit_text_line"
+        android:hint="@string/course"
         android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/faculty_password"
         android:layout_width="@dimen/edit_text_width"
         android:layout_height="@dimen/login_view_height"
-        android:hint="@string/password"
         android:backgroundTint="@color/edit_text_line"
+        android:hint="@string/password"
         android:inputType="textVisiblePassword" />
 
     <Button

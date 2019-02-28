@@ -28,7 +28,7 @@ public class AdministeringFaculty extends Fragment
 
     String text;
 
-    int editTextIds[] = {R.id.faculty_id, R.id.faculty_subject, R.id.faculty_password};
+    int editTextIds[] = {R.id.faculty_id, R.id.faculty_name, R.id.faculty_subject, R.id.faculty_password};
     private EditText facultyEditTexts[] = new EditText[editTextIds.length];
 
     String facultyDetails[] = new String[editTextIds.length];
@@ -51,7 +51,7 @@ public class AdministeringFaculty extends Fragment
         for (int i = 0; i < editTextIds.length; i++)
             facultyEditTexts[i] = layout.findViewById(editTextIds[i]);
 
-        facultyEditTexts[2].setText(getString(R.string.time_table));
+        facultyEditTexts[3].setText(getString(R.string.time_table));
 
         //uploading the CSV file form device memory
         uploadFile.setOnClickListener(new View.OnClickListener()
@@ -59,7 +59,7 @@ public class AdministeringFaculty extends Fragment
             @Override
             public void onClick(View v)
             {
-                Toast.makeText(getContext(),"not implemented", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "not implemented", Toast.LENGTH_SHORT).show();
                 //onBrowse();
             }
         });
@@ -79,15 +79,15 @@ public class AdministeringFaculty extends Fragment
                     for (int i = 0; i < editTextIds.length; i++)
                         if (facultyDetails[i].equals(""))
                         {
-                            ok=false;
+                            ok = false;
                             Toast.makeText(getContext(), "enter all details", Toast.LENGTH_LONG).show();
                             break;
                         }
 
                     if (ok)
                     {
-                        //update faculty id, subject and password
-                        FireBase.setFaculty(facultyDetails[0],facultyDetails[1],facultyDetails[2]);
+                        //update faculty id,name, subject and password
+                        FireBase.setFaculty(facultyDetails[0],facultyDetails[1], facultyDetails[2], facultyDetails[3]);
                     }
 
                 } else
@@ -152,8 +152,7 @@ public class AdministeringFaculty extends Fragment
 
         String line;
 
-        while ((line = br.readLine()) != null)
-            text = text.concat(line);
+        while ((line = br.readLine()) != null) text = text.concat(line);
 
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
 
