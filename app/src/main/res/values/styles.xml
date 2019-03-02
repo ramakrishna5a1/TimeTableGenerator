@@ -20,4 +20,10 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">15sp</item>
     </style>
+
+    <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.DatePicker">
+        <item name="android:headerBackground">@color/date_head_color</item>
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+        <item name="android:calendarTextColor">@color/colorPrimary</item>
+    </style>
 </resources>

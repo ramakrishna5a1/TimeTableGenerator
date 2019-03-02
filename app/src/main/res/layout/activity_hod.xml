@@ -39,7 +39,7 @@
         android:layout_height="@dimen/login_view_height"
         android:layout_marginTop="35dp"
         android:onClick="generateTimeTable"
-        android:text="@string/generate_time_table"
+        android:text="@string/create_time_table"
         android:textAllCaps="false" />
 
     <Button

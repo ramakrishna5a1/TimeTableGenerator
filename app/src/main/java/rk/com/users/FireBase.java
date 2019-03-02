@@ -13,8 +13,8 @@ class FireBase
 {
     private static DatabaseReference wholeDatabaseReference;
 
-    private static DatabaseReference facultyDataReference;
-    protected static DataSnapshot facultyDataSnapshot;
+    static DatabaseReference facultyDataReference;
+    static DataSnapshot facultyDataSnapshot;
 
     String users[] = {"admin", "faculty", "hod", "student"};
     private static DataSnapshot totalDataSnapshot;

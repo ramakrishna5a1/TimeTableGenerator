@@ -1,17 +1,19 @@
 package rk.com.users;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.GenericTypeIndicator;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -21,13 +23,21 @@ public class TimeTableData extends AppCompatActivity
 {
     int facultyCount = 0;
     LinearLayout linearLayout;
-    TreeMap<String, Faculty> facultyDetails;
+    HashMap<String, Faculty> facultyDetails;
 
-    String facultyNames[] = new String[10];
-    String facultySubjects[] = new String[10];
-    String facultyId[] = new String[10];
-    TreeSet<String> treeSet;
+    String facultyNames[];
+    String facultySubjects[];
+    String facultyId[];
+    TreeSet<Integer> treeSet;
     SchedulerMain schedulerMain;
+
+    //final time table data variables
+    int hoursOfDay = 3;
+    int studentGroups = 2;
+    String selectedNames[];
+
+    TextView hoursView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -36,30 +46,23 @@ public class TimeTableData extends AppCompatActivity
         setContentView(R.layout.activity_time_table_data);
 
         linearLayout = findViewById(R.id.checkBoxes);
-        facultyDetails = new TreeMap<>();
-        treeSet = new TreeSet<String>();
+        facultyDetails = new HashMap<>();
+        treeSet = new TreeSet<>();
         schedulerMain = new SchedulerMain();
-        try
-        {
-            fetchFacultyData();
-        } catch (Exception e)
-        {
-            //Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-
-        String selectedNames[] = new String[facultyCount];
+        fetchFacultyData();
+        hoursView = findViewById(R.id.no_of_hours);
 
         View.OnClickListener checkBoxListener = new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                if (treeSet.contains("" + v.getId()))
+                if (treeSet.contains(v.getId()))
                 {
-                    treeSet.remove("" + v.getId());
+                    treeSet.remove(v.getId());
                 } else
                 {
-                    treeSet.add("" + v.getId());
+                    treeSet.add(v.getId());
                 }
 
                 Toast.makeText(getApplicationContext(), "" + treeSet, Toast.LENGTH_SHORT).show();
@@ -75,6 +78,7 @@ public class TimeTableData extends AppCompatActivity
             checkBox.setOnClickListener(checkBoxListener);
             checkBox.setText(String.format("%s  [Subject: %s]", singleFacultyDetails.getValue().getName(), singleFacultyDetails.getValue().getSubject()));
             checkBox.setTextColor(getResources().getColor(R.color.colorPrimary));
+            checkBox.setBackgroundTintMode(PorterDuff.Mode.DARKEN);
             checkBox.setTextSize(20);
             checkBox.setId(i);
             linearLayout.addView(checkBox);
@@ -89,14 +93,22 @@ public class TimeTableData extends AppCompatActivity
         };
 
         HashMap<String, HashMap<String, String>> hashMap = FireBase.facultyDataSnapshot.getValue(genericTypeIndicator);
-        facultyCount = (int) FireBase.facultyDataSnapshot.getChildrenCount();
-
         assert hashMap != null;
-        int i = 1, j = 1, k = 1;
-        for (Map.Entry<String, HashMap<String, String>> parent : hashMap.entrySet())
+        facultyCount = hashMap.size();
+
+        int i = 0, j = 0, k = 0;
+
+        selectedNames = new String[facultyCount];
+        facultyNames = new String[facultyCount];
+        facultySubjects = new String[facultyCount];
+        facultyId = new String[facultyCount];
+
+        for (HashMap.Entry<String, HashMap<String, String>> parent : hashMap.entrySet())
         {
             Faculty f1 = new Faculty();
-            facultyId[i++] = parent.getKey();
+            facultyId[k++] = parent.getKey();
+            Log.i("key", "" + parent.getKey());
+
             for (HashMap.Entry<String, String> child : parent.getValue().entrySet())
             {
                 switch (child.getKey())
@@ -104,19 +116,20 @@ public class TimeTableData extends AppCompatActivity
                     case "name":
                         facultyNames[i++] = child.getValue();
                         f1.setName(child.getValue());
+                        Log.i("child:", "" + f1.getName());
                         break;
+
                     case "subject":
                         facultySubjects[j++] = child.getValue();
                         f1.setSubject(child.getValue());
+                        Log.i("child:", "" + f1.getSubject());
                         break;
+
                     default:
                         f1.setPassword(child.getValue());
                         break;
                 }
             }
-            //Toast.makeText(this,""+facultyCount,Toast.LENGTH_LONG).show();
-
-            facultyCount++;
             facultyDetails.put(parent.getKey(), f1);
         }
     }
@@ -127,30 +140,46 @@ public class TimeTableData extends AppCompatActivity
             Toast.makeText(this, "Select Faculties from the list", Toast.LENGTH_LONG).show();
         else
         {
-            if (treeSet.size() < 3)
-                Toast.makeText(this, "select atleast 4 options", Toast.LENGTH_LONG).show();
+            if (treeSet.size() < 4)
+                Toast.makeText(this, "select minimum 5 options", Toast.LENGTH_LONG).show();
             else
             {
-                for(int i=1;i<=treeSet.size();i++){
-
-                }
-
-                new Thread(() -> {
-
-                    while (schedulerMain.geneticOperations(getApplicationContext()) == 1) ;
-
-                    try
+                    int i = 0;
+                    for (Integer ele : treeSet)
                     {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
+                        selectedNames[i++] = facultyNames[ele - 1];
+                        Log.i("index", "" + i + " " + facultyNames[ele - 1]);
                     }
-                }).start();
+
+                    schedulerMain.geneticOperations(getApplicationContext());
             }
         }
     }
+
+
+    public void hoursPerDay(View view)
+    {
+        switch (view.getId())
+        {
+            case R.id.hours_btn_plus:
+                if (hoursOfDay != 7)
+                {
+                    hoursOfDay++;
+                    hoursView.setText("" + hoursOfDay);
+                }
+                break;
+            case R.id.hours_btn_minus:
+                if (hoursOfDay != 3)
+                {
+                    hoursOfDay--;
+                    hoursView.setText("" + hoursOfDay);
+                }
+
+                break;
+        }
+    }
 }
+
 
 
 class Faculty implements Serializable

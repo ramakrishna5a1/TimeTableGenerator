@@ -48,6 +48,29 @@ public class SchedulerMain
         return 1;
     }
 
+    public SchedulerMain()
+    {
+
+        InputData i = new InputData();
+        i.takeInput();
+
+        //printing input data (on console for testing)
+        //Utility.printInputData();
+
+        //generating slots
+        new TimeTable();
+
+        //printing slots (testing purpose only)
+        //Utility.printSlots();
+
+        //initialising first generation of chromosomes and puting in first arraylist
+        initialisePopulation();
+
+        //generating newer generation of chromosomes using crossovers and mutation
+        createNewGenerations();
+
+    }
+
     //Creating new Generations using crossovers and mutations
     private void createNewGenerations()
     {
@@ -242,6 +265,6 @@ public class SchedulerMain
 
     public static void main(String[] args)
     {
-
+            new SchedulerMain();
     }
 }

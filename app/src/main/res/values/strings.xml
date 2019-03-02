@@ -17,11 +17,13 @@
     <string name="change">change</string>
     <string name="request_leave">Request Leave</string>
     <string name="leaves">leaves</string>
-    <string name="generate_time_table">Generate Time Table</string>
+    <string name="create_time_table">Create Time Table</string>
     <string name="department_of">Department Of</string>
     <string name="department">Computer Science</string>
     <string name="department_name">Department Name</string>
     <string name="faculty_name">Faculty Name</string>
     <string name="available_faculty">Available Faculty</string>
+    <string name="generate_timetable">Generate TimeTable</string>
+    <string name="submit_request">Submit Request</string>
 
 </resources>

@@ -95,6 +95,9 @@ public class StudentActivity extends AppCompatActivity
                     } else if (passwords[1].equals(passwords[2]))
                     {
                         FireBase.changeDatabasePassword(userType, userId, passwords[1]);
+
+                        Toast.makeText(context, "Password changed", Toast.LENGTH_LONG).show();
+
                         myDialog.cancel();
                     } else
                         Toast.makeText(context, "Password mismatch...", Toast.LENGTH_LONG).show();

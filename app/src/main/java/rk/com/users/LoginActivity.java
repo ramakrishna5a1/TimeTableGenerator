@@ -1,5 +1,6 @@
 package rk.com.users;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     private String userType = " ", databasePassword;
 
     FireBase fireBase;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,9 +69,11 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             {
                 //retrieving the password from database based on the user type
                 if (userType.equals("student") || userType.equals("HOD") || userType.equals("admin"))
+                {
                     databasePassword = FireBase.getPassword(userType, userName);
-                else if (userType.equals("faculty"))
+                }else if (userType.equals("faculty")){
                     databasePassword = FireBase.getFacultyPassword(userName);
+                }
 
                 if (password.equals(databasePassword))
                 {
@@ -135,4 +139,3 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         // Another interface callback
     }
 }
-

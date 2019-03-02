@@ -19,6 +19,8 @@ public class ConnectionCheck extends BroadcastReceiver
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
+        if(activeNetwork!=null)
+            activeNetwork.getDetailedState();
         if (intent.getExtras() != null)
         {
             if (isConnected)

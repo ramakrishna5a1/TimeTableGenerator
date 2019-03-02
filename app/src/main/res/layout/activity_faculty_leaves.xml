@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Choose Date of Leave"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:textStyle="normal" />
+
+        <DatePicker
+            android:id="@+id/leave_date"
+            style="@style/MyDatePickerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="310dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/layout_background"
+            android:calendarTextColor="@color/colorPrimary"
+            android:datePickerMode="calendar"
+            android:scrollbarStyle="outsideOverlay" />
+    </LinearLayout>
+
+    <Button
+        style="@style/button_style"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_view_height"
+        android:layout_margin="10dp"
+        android:layout_weight="0"
+        android:onClick="submitLeave"
+        android:text="@string/submit_request"
+        android:textAllCaps="false"
+        android:textSize="20sp" />
+</LinearLayout>

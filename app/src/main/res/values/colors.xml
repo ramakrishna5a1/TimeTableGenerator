@@ -8,4 +8,5 @@
     <color name="button_color">#2c008577</color>
     <color name="table_cell_color">#0A008577</color>
     <color name="table_text_color">#020202</color>
+    <color name="date_head_color">#4B008577</color>
 </resources>

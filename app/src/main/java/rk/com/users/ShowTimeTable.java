@@ -20,7 +20,7 @@ public class ShowTimeTable extends AppCompatActivity
 
     TextView tableCellViews[][] = new TextView[6][7];
 
-    public static String[][] timeTableData = {{"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}};
+    public static String[][] timeTableData = {{"-", "-", "-", "-", "-", "-", "-"}, {"-", "-", "-", "-", "-", "-", "-"}, {"-", "-", "-", "-", "-", "-", "-"}, {"-", "-", "-", "-", "-", "-", "-"}, {"-", "-", "-", "-", "-", "-", "-"}, {"-", "-", "-", "-", "-", "-", "-"}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,7 +32,7 @@ public class ShowTimeTable extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_time_table);
 
-        if(timeTableData[0][0].equals("0")){
+        if(timeTableData[0][0].equals("-")){
             Toast.makeText(this, "No Timetable published", Toast.LENGTH_SHORT).show();
             finish();
         }

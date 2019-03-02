@@ -1,128 +1,157 @@
 package scheduler;
 
-import java.io.File;
-import java.util.*;
+import android.util.Log;
 
-public class inputdata {
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
-	public static StudentGroup[] studentgroup;
-	public static Teacher[] teacher;
-	public static double crossoverrate = 1.0, mutationrate = 0.1;
-	public static int nostudentgroup, noteacher;
-	public static int hoursperday, daysperweek;
+class InputData
+{
+    static StudentGroup[] studentgroup;
+    static Teacher[] teacher;
+    static double crossoverrate = 1.0, mutationrate = 0.1;
+    static int nostudentgroup, noteacher;
+    static int hoursperday, daysperweek;
 
-	public inputdata() {
-		studentgroup = new StudentGroup[100];
-		teacher =   new Teacher[100];
-	}
+    InputData()
+    {
+        studentgroup = new StudentGroup[10];
+        teacher = new Teacher[100];
+    }
 
-	boolean classformat(String l) {
-		StringTokenizer st = new StringTokenizer(l, " ");
-		if (st.countTokens() == 3)
-			return (true);
-		else
-			return (false);
-	}
+    boolean classFormat(String l)
+    {
+        StringTokenizer st = new StringTokenizer(l, " ");
+        return st.countTokens() == 3;
+    }
 
-	public void takeinput()// takes input from file input.txt
-	{
-		//this method of taking input through file is only for development purpose so hours and days are hard coded
-		hoursperday = 7;
-		daysperweek = 5;
-		try {
-			File file = new File("C:\\Users\\RAMA KRISHNA\\Desktop\\input.txt");
-			// File file = new File(System.getProperty("user.dir") +
-			// "/input.txt");
-			
-			Scanner scanner = new Scanner(file);
-			
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
+    void takeInput()// takes input from file input.txt
+    {
+        //this method of taking input through file is only for development purpose so hours and days are hard coded
+        hoursperday = 5;
+        daysperweek = 6;
 
-				// input student groups
-				if (line.equalsIgnoreCase("studentgroups")) {
-					int i = 0, j;
-					while (!(line = scanner.nextLine()).equalsIgnoreCase("teachers")) {
-						studentgroup[i] = new StudentGroup();
-						StringTokenizer st = new StringTokenizer(line, " ");
-						studentgroup[i].id = i;
-						studentgroup[i].name = st.nextToken();
-						studentgroup[i].nosubject = 0;
-						j = 0;
-						while (st.hasMoreTokens()) {
-							studentgroup[i].subject[j] = st.nextToken();
-							studentgroup[i].hours[j++] = Integer.parseInt(st.nextToken());
-							studentgroup[i].nosubject++;
-						}
-						i++;
-					}
-					nostudentgroup = i;
-				}
+        try
+        {
+            //File file = new File("D:\\ANDROID\\TimeTableGenerator\\app\\src\\main\\input.txt");
+            Scanner scanner = new Scanner("studentgroups\n"
+                    + "CSE-A(Ist-Year) SNSW 6 DS 6 HCI 6 MS 6\n"
+                    + "CSE-B(Ist-Year) CC 7 DS 4 HCI 3 MS 6\n"
+                    + "teachers\n"
+                    + "O.N.Singh CC\n"
+                    + "AKT SNSW\n"
+                    + "Panda MS\n"
+                    + "Tyagi HCI\n"
+                    + "SKS DS\n"
+                    + "end");
 
-				//input teachers
-				if (line.equalsIgnoreCase("teachers")) {
-					int i = 0;
-					while (!(line = scanner.nextLine()).equalsIgnoreCase("end")) {
-						teacher[i] = new Teacher();
-						StringTokenizer st = new StringTokenizer(line, " ");
-						teacher[i].id = i;
-						teacher[i].name = st.nextToken();
-						teacher[i].subject = st.nextToken();
+            //AC-snsw ME-1111-ds PC-1101-MS EVS-1101-HCI
 
-						i++;
-					}
-					noteacher = i;
-				}
+            while (scanner.hasNextLine())
+            {
+                String line = scanner.nextLine();
 
-			}
-			scanner.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+                // input student groups
+                if (line.equalsIgnoreCase("studentgroups"))
+                {
+                    int i = 0, j;
 
-		assignTeacher();
+                    while (!(line = scanner.nextLine()).equalsIgnoreCase("teachers"))
+                    {
+                        studentgroup[i] = new StudentGroup();
+                        StringTokenizer st = new StringTokenizer(line, " ");
 
-	}
+                        studentgroup[i].id = i;
+                        studentgroup[i].name = st.nextToken();
+                        studentgroup[i].noSubject = 0;
 
-	// assigning a teacher for each subject for every studentgroup
-	public void assignTeacher() {
+                        j = 0;
+                        while (st.hasMoreTokens())
+                        {
+                            studentgroup[i].subject[j] = st.nextToken();
+                            studentgroup[i].hours[j++] = Integer.parseInt(st.nextToken());
+                            studentgroup[i].noSubject++;
+                        }
 
-		// looping through every studentgroup
-		for (int i = 0; i < nostudentgroup; i++) {
+                        i++;
+                    }
 
-			// looping through every subject of a student group
-			for (int j = 0; j < studentgroup[i].nosubject; j++) {
+                    nostudentgroup = i;
+                }
 
-				int teacherid = -1;
-				int assignedmin = -1;
+                //input teachers
+                if (line.equalsIgnoreCase("teachers"))
+                {
+                    int i = 0;
+                    while (!(line = scanner.nextLine()).equalsIgnoreCase("end"))
+                    {
+                        teacher[i] = new Teacher();
+                        StringTokenizer st = new StringTokenizer(line, " ");
+                        teacher[i].id = i;
+                        teacher[i].name = st.nextToken();
+                        teacher[i].subject = st.nextToken();
 
-				String subject = studentgroup[i].subject[j];
+                        //Log.i("Teachers",""+ teacher[i].toString());
+                        i++;
+                    }
 
-				// looping through every teacher to find which teacher teaches the current subject
-				for (int k = 0; k < noteacher; k++) {
+                    noteacher = i;
+                }
 
-					// if such teacher found,checking if he should be assigned the subject or some other teacher based on prior assignments
-					if (teacher[k].subject.equalsIgnoreCase(subject)) {
+            }
 
-						// if first teacher found for this subject
-						if (assignedmin == -1) {
-							assignedmin = teacher[k].assigned;
-							teacherid = k;
-						}
+            scanner.close();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
 
-						// if teacher found has less no of pre assignments than the teacher assigned for this subject
-						else if (assignedmin > teacher[k].assigned) {
-							assignedmin = teacher[k].assigned;
-							teacherid = k;
-						}
-					}
-				}
+        assignTeacher();
+    }
 
-				// 'assigned' variable for selected teacher incremented
-				teacher[teacherid].assigned++;
+    // assigning a teacher for each subject for every studentgroup
+    private void assignTeacher()
+    {
+        // looping through every studentgroup
+        for (int i = 0; i < nostudentgroup; i++)
+        {
 
-				studentgroup[i].teacherid[j]= teacherid;
-			}
-		}
-	}
+            // looping through every subject of a student group
+            for (int j = 0; j < studentgroup[i].noSubject; j++)
+            {
+                int teacherid = -1;
+                int assignedmin = -1;
+
+                String subject = studentgroup[i].subject[j];
+
+                // looping through every teacher to find which teacher teaches the current subject
+                for (int k = 0; k < noteacher; k++)
+                {
+
+                    // if such teacher found,checking if he should be assigned the subject or some other teacher based on prior assignments
+                    if (teacher[k].subject.equalsIgnoreCase(subject))
+                    {
+                        // if first teacher found for this subject
+                        if (assignedmin == -1)
+                        {
+                            assignedmin = teacher[k].assigned;
+                            teacherid = k;
+                        }
+                        // if teacher found has less no of pre assignments than the teacher assigned for this subject
+                        else if (assignedmin > teacher[k].assigned)
+                        {
+                            assignedmin = teacher[k].assigned;
+                            teacherid = k;
+                        }
+                    }
+                }
+
+                // 'assigned' variable for selected teacher incremented
+                teacher[teacherid].assigned++;
+                studentgroup[i].teacherId[j] = teacherid;
+            }
+        }
+    }
 }
+
