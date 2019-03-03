@@ -58,6 +58,7 @@
             app:hintTextAppearance="@style/toggle_text"
             app:passwordToggleEnabled="true">
 
+
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
