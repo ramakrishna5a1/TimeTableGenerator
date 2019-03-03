@@ -92,6 +92,13 @@ class FireBase
         //wholeDatabaseReference.child("faculty").child(userName).child("leaveStatus").setValue("no");
     }
 
+    //adding leave details to firebase
+    static void sendLeave(String username,String message)
+    {
+        wholeDatabaseReference.child("leaves").child(username).setValue(message);
+    }
+
+
     static void changeDatabasePassword(String userType, String userTd, String password)
     {
         if (userType.equals("faculty"))

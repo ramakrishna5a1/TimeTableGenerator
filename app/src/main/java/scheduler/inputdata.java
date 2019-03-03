@@ -14,10 +14,11 @@ class InputData
     static int nostudentgroup, noteacher;
     static int hoursperday, daysperweek;
 
-    InputData()
+    InputData(int hoursOfDay)
     {
         studentgroup = new StudentGroup[10];
         teacher = new Teacher[100];
+    //    InputData.hoursperday =hoursOfDay;
     }
 
     boolean classFormat(String l)
@@ -36,12 +37,13 @@ class InputData
         {
             //File file = new File("D:\\ANDROID\\TimeTableGenerator\\app\\src\\main\\input.txt");
             Scanner scanner = new Scanner("studentgroups\n"
-                    + "CSE-A(Ist-Year) SNSW 6 DS 6 HCI 6 MS 6\n"
-                    + "CSE-B(Ist-Year) CC 7 DS 4 HCI 3 MS 6\n"
+                    + "CSE-A SNSW 6 DS 3 HCI 6 MS 6 JAVA 8\n"
+                    + "CSE-B CC 7 DS 4 HCI 3 MS 6\n"
                     + "teachers\n"
                     + "O.N.Singh CC\n"
                     + "AKT SNSW\n"
                     + "Panda MS\n"
+                    + "subhash JAVA\n"
                     + "Tyagi HCI\n"
                     + "SKS DS\n"
                     + "end");

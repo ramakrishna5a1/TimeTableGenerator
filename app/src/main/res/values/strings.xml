@@ -22,8 +22,11 @@
     <string name="department">Computer Science</string>
     <string name="department_name">Department Name</string>
     <string name="faculty_name">Faculty Name</string>
-    <string name="available_faculty">Available Faculty</string>
+    <string name="available_faculty">Available Faculty:</string>
     <string name="generate_timetable">Generate TimeTable</string>
     <string name="submit_request">Submit Request</string>
+    <string name="available_sections">Available Sections:</string>
+    <string name="choose_date_of_leave">Choose Date of Leave</string>
+    <string name="write_your_message">Write your message...</string>
 
 </resources>

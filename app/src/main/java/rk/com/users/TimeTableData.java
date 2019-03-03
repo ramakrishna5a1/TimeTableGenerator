@@ -22,7 +22,7 @@ import scheduler.SchedulerMain;
 public class TimeTableData extends AppCompatActivity
 {
     int facultyCount = 0;
-    LinearLayout linearLayout;
+    LinearLayout facultyLinearLayout, studentLinearLayout;
     HashMap<String, Faculty> facultyDetails;
 
     String facultyNames[];
@@ -45,12 +45,32 @@ public class TimeTableData extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table_data);
 
-        linearLayout = findViewById(R.id.checkBoxes);
+        facultyLinearLayout = findViewById(R.id.faculty_checkBoxes);
+        studentLinearLayout = findViewById(R.id.section_TextViews);
+
         facultyDetails = new HashMap<>();
         treeSet = new TreeSet<>();
         schedulerMain = new SchedulerMain();
         fetchFacultyData();
         hoursView = findViewById(R.id.no_of_hours);
+
+        setFacultyData();
+        setStudentGroupsData();
+
+
+    }
+
+    public void setStudentGroupsData()
+    {
+        TextView textView = new TextView(this);
+        textView.setText("CSE-A");
+        textView.setTextColor(getResources().getColor(R.color.colorPrimary));
+        textView.setTextSize(80);
+        studentLinearLayout.addView(textView);
+    }
+
+    public void setFacultyData()
+    {
 
         View.OnClickListener checkBoxListener = new View.OnClickListener()
         {
@@ -76,14 +96,15 @@ public class TimeTableData extends AppCompatActivity
             CheckBox checkBox = new CheckBox(this);
 
             checkBox.setOnClickListener(checkBoxListener);
-            checkBox.setText(String.format("%s  [Subject: %s]", singleFacultyDetails.getValue().getName(), singleFacultyDetails.getValue().getSubject()));
+            checkBox.setText(String.format("%s  [Subject: %s]", singleFacultyDetails.getValue().getName().toUpperCase(), singleFacultyDetails.getValue().getSubject()));
             checkBox.setTextColor(getResources().getColor(R.color.colorPrimary));
             checkBox.setBackgroundTintMode(PorterDuff.Mode.DARKEN);
-            checkBox.setTextSize(20);
+            checkBox.setTextSize(15);
             checkBox.setId(i);
-            linearLayout.addView(checkBox);
+            facultyLinearLayout.addView(checkBox);
             i++;
         }
+
     }
 
     public void fetchFacultyData()
@@ -141,21 +162,20 @@ public class TimeTableData extends AppCompatActivity
         else
         {
             if (treeSet.size() < 4)
-                Toast.makeText(this, "select minimum 5 options", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "select minimum 4 options", Toast.LENGTH_LONG).show();
             else
             {
-                    int i = 0;
-                    for (Integer ele : treeSet)
-                    {
-                        selectedNames[i++] = facultyNames[ele - 1];
-                        Log.i("index", "" + i + " " + facultyNames[ele - 1]);
-                    }
+                int i = 0;
+                for (Integer ele : treeSet)
+                {
+                    selectedNames[i++] = facultyNames[ele - 1];
+                    Log.i("index", "" + i + " " + facultyNames[ele - 1]);
+                }
 
-                    schedulerMain.geneticOperations(getApplicationContext());
+                schedulerMain.geneticOperations(getApplicationContext(), hoursOfDay);
             }
         }
     }
-
 
     public void hoursPerDay(View view)
     {
@@ -178,8 +198,8 @@ public class TimeTableData extends AppCompatActivity
                 break;
         }
     }
-}
 
+}
 
 
 class Faculty implements Serializable

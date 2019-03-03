@@ -22,9 +22,9 @@ public class SchedulerMain
     private double firstListFitness;
     private int populationSize = 1000;
 
-    public int geneticOperations(Context c){
-
-        InputData i = new InputData();
+    public void geneticOperations(Context c, int hoursOfDay)
+    {
+        InputData i = new InputData(hoursOfDay);
         i.takeInput();
 
         //printing input data (on console for testing)
@@ -42,16 +42,15 @@ public class SchedulerMain
         //generating newer generation of chromosomes using crossovers and mutation
         createNewGenerations();
 
-//        Toast.makeText(c,"Generated...",Toast.LENGTH_LONG).show();
+        Toast.makeText(c,"Generated...",Toast.LENGTH_LONG).show();
 
 
-        return 1;
     }
 
     public SchedulerMain()
     {
 
-        InputData i = new InputData();
+        InputData i = new InputData(5);
         i.takeInput();
 
         //printing input data (on console for testing)
