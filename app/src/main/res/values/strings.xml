@@ -28,5 +28,6 @@
     <string name="available_sections">Available Sections:</string>
     <string name="choose_date_of_leave">Choose Date of Leave</string>
     <string name="write_your_message">Write your message...</string>
+    <string name="add_or_remove_sections">Add or Remove Sections</string>
 
 </resources>

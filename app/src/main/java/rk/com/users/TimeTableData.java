@@ -19,6 +19,7 @@ import java.util.TreeSet;
 
 import scheduler.SchedulerMain;
 
+
 public class TimeTableData extends AppCompatActivity
 {
     int facultyCount = 0;
@@ -198,7 +199,6 @@ public class TimeTableData extends AppCompatActivity
                 break;
         }
     }
-
 }
 
 
