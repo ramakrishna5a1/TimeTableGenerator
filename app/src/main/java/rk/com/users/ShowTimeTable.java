@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import scheduler.Chromosome;
 
+
 public class ShowTimeTable extends AppCompatActivity
 {
 
@@ -42,8 +43,8 @@ public class ShowTimeTable extends AppCompatActivity
                 tableCellViews[i][j] = findViewById(ids[i][j]);
 
         //setting text to each cell
-        for (i = 0; i < 6; i++)
-            for (j = 0; j < 7; j++)
+        for (i = 0; i < Chromosome.days; i++)
+            for (j = 0; j < Chromosome.days; j++)
                 tableCellViews[i][j].setText(timeTableData[i][j]);
     }
 }

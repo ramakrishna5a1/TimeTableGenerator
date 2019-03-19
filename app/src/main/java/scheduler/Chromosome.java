@@ -16,11 +16,12 @@ public class Chromosome implements Comparable<Chromosome>, Serializable
 {
     static double crossoverrate = InputData.crossoverrate;
     static double mutationrate = InputData.mutationrate;
-    private static int hours = InputData.hoursperday, days = InputData.daysperweek;
-    private static int nostgrp = InputData.nostudentgroup;
+    public static int hours = InputData.hoursperday, days = InputData.daysperweek;
+    public static int nostgrp = InputData.nostudentgroup;
     double fitness;
 
     Gene[] gene;
+
     Chromosome()
     {
         gene = new Gene[nostgrp];
@@ -45,8 +46,7 @@ public class Chromosome implements Comparable<Chromosome>, Serializable
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bais);
             return (Chromosome) ois.readObject();
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
             return null;
         } catch (ClassNotFoundException e)
@@ -61,7 +61,7 @@ public class Chromosome implements Comparable<Chromosome>, Serializable
         for (int i = 0; i < hours * days; i++)
         {
 
-            List<Integer> teacherList = new ArrayList<Integer>();
+            List<Integer> teacherList = new ArrayList<>();
 
             for (int j = 0; j < nostgrp; j++)
             {
@@ -81,7 +81,6 @@ public class Chromosome implements Comparable<Chromosome>, Serializable
 
         //System.out.println(point);
         fitness = 1 - (point / ((nostgrp - 1.0) * hours * days));
-        point = 0;
         return fitness;
     }
 

@@ -13,8 +13,9 @@ class FireBase
 {
     private static DatabaseReference wholeDatabaseReference;
 
-    static DatabaseReference facultyDataReference;
     static DataSnapshot facultyDataSnapshot;
+
+    static DataSnapshot leavesDataSnapshot;
 
     String users[] = {"admin", "faculty", "hod", "student"};
     private static DataSnapshot totalDataSnapshot;
@@ -23,6 +24,9 @@ class FireBase
     {
 
         wholeDatabaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference facultyDataReference = FirebaseDatabase.getInstance().getReference().child("faculty");
+        DatabaseReference leavesDataReference = FirebaseDatabase.getInstance().getReference().child("leaves ");
+
 
         wholeDatabaseReference.addValueEventListener(new ValueEventListener()
         {
@@ -38,14 +42,26 @@ class FireBase
             }
         });
 
-        facultyDataReference=FirebaseDatabase.getInstance().getReference().child("faculty");
-
         facultyDataReference.addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
                 facultyDataSnapshot=dataSnapshot;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError)
+            {
+            }
+        });
+
+        leavesDataReference.addValueEventListener(new ValueEventListener()
+        {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+            {
+             leavesDataSnapshot=dataSnapshot;
             }
 
             @Override
@@ -62,7 +78,6 @@ class FireBase
     {
         wholeDatabaseReference.child(userType).child(userName).setValue(password);
     }
-
 
     //adding details of HOD to database
     static void setHOD(String userName, String password)
@@ -133,12 +148,9 @@ class FireBase
         return "";
     }
 
-    //leave related operations are performed through this function\\
+    //leave related operations are performed through this function
     static String leaves(String userId, String data)
     {
-
         return "";
     }
 }
-
-

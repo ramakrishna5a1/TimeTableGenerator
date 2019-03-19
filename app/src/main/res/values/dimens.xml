@@ -6,9 +6,10 @@
     <dimen name="inner_layout_padding">10dp</dimen>
     <dimen name="edit_text_width">300dp</dimen>
     <dimen name="cell_width">110dp</dimen>
-    <dimen name="cell_height">60dp</dimen>
+    <dimen name="cell_height">45dp</dimen>
     <dimen name="table_padding">5dp</dimen>
     <dimen name="cell_text_size">18sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>
 
 

@@ -20,7 +20,7 @@ public class HODActivity extends AppCompatActivity
 
     public void acceptRejectLeaves(View view)
     {
-
+            startActivity(new Intent(this,FacultyLeavesActivity.class));
     }
 
     public void generateTimeTable(View view)

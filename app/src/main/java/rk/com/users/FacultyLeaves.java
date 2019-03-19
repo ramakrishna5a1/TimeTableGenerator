@@ -24,7 +24,7 @@ public class FacultyLeaves extends AppCompatActivity
         userId = facultyIntent.getStringExtra("facultyId");
 
         datePicker = findViewById(R.id.leave_date);
-        leaveMessage = findViewById(R.id.leave_message);
+        leaveMessage = findViewById(R.id.sent_leave_message);
 
         long now = System.currentTimeMillis();
         datePicker.setMinDate(now + (1000 * 60 * 60 * 24));

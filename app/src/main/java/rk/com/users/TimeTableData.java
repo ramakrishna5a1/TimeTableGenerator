@@ -1,11 +1,15 @@
 package rk.com.users;
 
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,8 +24,10 @@ import java.util.TreeSet;
 import scheduler.SchedulerMain;
 
 
-public class TimeTableData extends AppCompatActivity
+public class TimeTableData extends AppCompatActivity implements View.OnClickListener
 {
+
+    static int ids;
     int facultyCount = 0;
     LinearLayout facultyLinearLayout, studentLinearLayout;
     HashMap<String, Faculty> facultyDetails;
@@ -33,10 +39,8 @@ public class TimeTableData extends AppCompatActivity
     SchedulerMain schedulerMain;
 
     //final time table data variables
-    int hoursOfDay = 3;
-    int studentGroups = 2;
-    String selectedNames[];
-
+    static int hoursOfDay = 3;
+    String input = "";
     TextView hoursView;
 
 
@@ -55,24 +59,72 @@ public class TimeTableData extends AppCompatActivity
         fetchFacultyData();
         hoursView = findViewById(R.id.no_of_hours);
 
-        setFacultyData();
-        setStudentGroupsData();
-
-
     }
 
-    public void setStudentGroupsData()
+
+    public void AddSection(View view)
     {
-        TextView textView = new TextView(this);
-        textView.setText("CSE-A");
-        textView.setTextColor(getResources().getColor(R.color.colorPrimary));
-        textView.setTextSize(80);
-        studentLinearLayout.addView(textView);
+        facultyLinearLayout.removeAllViews();
+        setFacultyData();
+
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View rowView = inflater.inflate(R.layout.single_section_row, null);
+
+
+        rowView.findViewById(R.id.finalize).setId(ids);
+        rowView.findViewById(ids).setOnClickListener(this);
+
+        rowView.findViewById(R.id.section_text).setId(ids);
+
+        studentLinearLayout.addView(rowView, studentLinearLayout.getChildCount() - 1);
+        ids++;
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        String result = "";
+        EditText et = v.getRootView().findViewById(v.getId());
+
+        result = result.concat(et.getText().toString());
+
+        if (result.equals(""))
+            Toast.makeText(this, "Enter section name", Toast.LENGTH_SHORT).show();
+        else if (treeSet.isEmpty())
+            Toast.makeText(this, "Select Faculties from the list", Toast.LENGTH_SHORT).show();
+        else
+        {
+            if (treeSet.size() < 4)
+                Toast.makeText(this, "select minimum 4 options", Toast.LENGTH_SHORT).show();
+            else
+            {
+                facultyLinearLayout.removeAllViews();
+                setFacultyData();
+
+                int i = 0;
+                for (Integer ele : treeSet)
+                {
+                    result = result.concat("#" + facultySubjects[ele - 1]) + "#" + "6";
+                    Log.i("index", "" + i + " " + facultyNames[ele - 1]);
+                    i++;
+                }
+                result = result.concat("\n");
+                Log.i("result", "" + result);
+
+                input = input.concat(result);
+
+                treeSet.clear();
+            }
+        }
+    }
+
+    public void removeSection(View view)
+    {
+        studentLinearLayout.removeView((View) view.getParent());
     }
 
     public void setFacultyData()
     {
-
         View.OnClickListener checkBoxListener = new View.OnClickListener()
         {
             @Override
@@ -120,7 +172,6 @@ public class TimeTableData extends AppCompatActivity
 
         int i = 0, j = 0, k = 0;
 
-        selectedNames = new String[facultyCount];
         facultyNames = new String[facultyCount];
         facultySubjects = new String[facultyCount];
         facultyId = new String[facultyCount];
@@ -158,23 +209,20 @@ public class TimeTableData extends AppCompatActivity
 
     public void generateTimetableWithData(View view)
     {
-        if (treeSet.isEmpty())
-            Toast.makeText(this, "Select Faculties from the list", Toast.LENGTH_LONG).show();
-        else
-        {
-            if (treeSet.size() < 4)
-                Toast.makeText(this, "select minimum 4 options", Toast.LENGTH_LONG).show();
-            else
-            {
-                int i = 0;
-                for (Integer ele : treeSet)
-                {
-                    selectedNames[i++] = facultyNames[ele - 1];
-                    Log.i("index", "" + i + " " + facultyNames[ele - 1]);
-                }
+        input = input.concat("teachers\n");
+        for (int i = 0; i < facultyNames.length; i++)
+            input = input.concat(facultyNames[i] + "#" + facultySubjects[i] + "\n");
 
-                schedulerMain.geneticOperations(getApplicationContext(), hoursOfDay);
-            }
+        Log.i("INPUT DATA", "" + input);
+        try
+        {
+            schedulerMain.geneticOperations(getApplicationContext(), hoursOfDay, input);
+            hoursOfDay = 3;
+        } catch (Exception e)
+        {
+            Toast.makeText(this, "something went wrong Please try again", Toast.LENGTH_LONG).show();
+            finish();
+            Log.i("Generation error", "" + e.getMessage());
         }
     }
 
@@ -200,7 +248,6 @@ public class TimeTableData extends AppCompatActivity
         }
     }
 }
-
 
 class Faculty implements Serializable
 {

@@ -10,7 +10,6 @@ import java.util.Random;
 
 public class SchedulerMain
 {
-
     /*
      * Time Table scheduling is an np-hard problem which can best be solved
      * using Genetic Algorithms (of Artificial Intelligence).
@@ -22,10 +21,10 @@ public class SchedulerMain
     private double firstListFitness;
     private int populationSize = 1000;
 
-    public void geneticOperations(Context c, int hoursOfDay)
+    public void geneticOperations(Context c, int hoursOfDay, String input)
     {
         InputData i = new InputData(hoursOfDay);
-        i.takeInput();
+        i.takeInput(input);
 
         //printing input data (on console for testing)
         //Utility.printInputData();
@@ -43,15 +42,13 @@ public class SchedulerMain
         createNewGenerations();
 
         Toast.makeText(c,"Generated...",Toast.LENGTH_LONG).show();
-
-
     }
 
-    public SchedulerMain()
+/*
+*     public SchedulerMain()
     {
-
         InputData i = new InputData(5);
-        i.takeInput();
+        //i.takeInput(inputData);
 
         //printing input data (on console for testing)
         //Utility.printInputData();
@@ -67,8 +64,8 @@ public class SchedulerMain
 
         //generating newer generation of chromosomes using crossovers and mutation
         createNewGenerations();
-
     }
+*/
 
     //Creating new Generations using crossovers and mutations
     private void createNewGenerations()
@@ -264,6 +261,6 @@ public class SchedulerMain
 
     public static void main(String[] args)
     {
-            new SchedulerMain();
+            //new SchedulerMain();
     }
 }

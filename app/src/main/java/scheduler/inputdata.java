@@ -2,7 +2,6 @@ package scheduler;
 
 import android.util.Log;
 
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -18,7 +17,7 @@ class InputData
     {
         studentgroup = new StudentGroup[10];
         teacher = new Teacher[100];
-    //    InputData.hoursperday =hoursOfDay;
+        InputData.hoursperday =hoursOfDay;
     }
 
     boolean classFormat(String l)
@@ -27,29 +26,15 @@ class InputData
         return st.countTokens() == 3;
     }
 
-    void takeInput()// takes input from file input.txt
+    void takeInput(String input)
     {
-        //this method of taking input through file is only for development purpose so hours and days are hard coded
-        hoursperday = 5;
         daysperweek = 6;
 
         try
         {
-            //File file = new File("D:\\ANDROID\\TimeTableGenerator\\app\\src\\main\\input.txt");
-            Scanner scanner = new Scanner("studentgroups\n"
-                    + "CSE-A SNSW 6 DS 3 HCI 6 MS 6 JAVA 8\n"
-                    + "CSE-B CC 7 DS 4 HCI 3 MS 6\n"
-                    + "teachers\n"
-                    + "O.N.Singh CC\n"
-                    + "AKT SNSW\n"
-                    + "Panda MS\n"
-                    + "subhash JAVA\n"
-                    + "Tyagi HCI\n"
-                    + "SKS DS\n"
-                    + "end");
+            Scanner scanner = new Scanner("studentgroups\n" + input + "end");
 
-            //AC-snsw ME-1111-ds PC-1101-MS EVS-1101-HCI
-
+            Log.i("Input data", "" + "studentgroups\n" + input);
             while (scanner.hasNextLine())
             {
                 String line = scanner.nextLine();
@@ -62,7 +47,7 @@ class InputData
                     while (!(line = scanner.nextLine()).equalsIgnoreCase("teachers"))
                     {
                         studentgroup[i] = new StudentGroup();
-                        StringTokenizer st = new StringTokenizer(line, " ");
+                        StringTokenizer st = new StringTokenizer(line, "#");
 
                         studentgroup[i].id = i;
                         studentgroup[i].name = st.nextToken();
@@ -75,7 +60,6 @@ class InputData
                             studentgroup[i].hours[j++] = Integer.parseInt(st.nextToken());
                             studentgroup[i].noSubject++;
                         }
-
                         i++;
                     }
 
@@ -89,7 +73,7 @@ class InputData
                     while (!(line = scanner.nextLine()).equalsIgnoreCase("end"))
                     {
                         teacher[i] = new Teacher();
-                        StringTokenizer st = new StringTokenizer(line, " ");
+                        StringTokenizer st = new StringTokenizer(line, "#");
                         teacher[i].id = i;
                         teacher[i].name = st.nextToken();
                         teacher[i].subject = st.nextToken();
@@ -97,12 +81,9 @@ class InputData
                         //Log.i("Teachers",""+ teacher[i].toString());
                         i++;
                     }
-
                     noteacher = i;
                 }
-
             }
-
             scanner.close();
         } catch (Exception e)
         {

@@ -14,7 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".FacultyLeaves"></activity>
+        <activity
+            android:name=".FacultyLeavesActivity"
+            android:label="@string/title_activity_faculty_leaves"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".FacultyLeaves" />
         <activity android:name=".TimeTableData" />
         <activity
             android:name=".ShowTimeTable"
