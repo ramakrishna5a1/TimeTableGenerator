@@ -25,12 +25,23 @@ public class ShowTimeTable extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        int i, j;
-        //sample data
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_time_table);
+        
+        int i, j;    
+        
+        /*
+            for (i = 0; i < 6; i++)
+            for (j = 0; j < 7; j++){
+                ids[i][j]=R.id.cell_11;
+            }
+            
+            for (i = 0; i < 6; i++)
+            for (j = 0; j < 7; j++){
+               timeTableData[i][j]="0";
+            }
+            
+        */
 
         if(timeTableData[0][0].equals("0")){
             Toast.makeText(this, "No Timetable published", Toast.LENGTH_SHORT).show();
