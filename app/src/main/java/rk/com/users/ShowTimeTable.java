@@ -17,11 +17,17 @@ public class ShowTimeTable extends AppCompatActivity
             {R.id.cell_41, R.id.cell_42, R.id.cell_43, R.id.cell_44, R.id.cell_45, R.id.cell_46, R.id.cell_47},
             {R.id.cell_51, R.id.cell_52, R.id.cell_53, R.id.cell_54, R.id.cell_55, R.id.cell_56, R.id.cell_57},
             {R.id.cell_61, R.id.cell_62, R.id.cell_63, R.id.cell_64, R.id.cell_65, R.id.cell_66, R.id.cell_67},};
+            
+    /*
+        
+    */
 
     TextView tableCellViews[][] = new TextView[6][7];
 
     public static String[][] timeTableData = {{"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}};
 
+    public static String[][] timeTableData=new String[7][8];
+    
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -47,6 +53,13 @@ public class ShowTimeTable extends AppCompatActivity
             Toast.makeText(this, "No Timetable published", Toast.LENGTH_SHORT).show();
             finish();
         }
+        
+        /*
+           for (i = 0; i < 6; i++)
+            for (j = 0; j < 7; j++)
+                tableCellViews[i][j] = findViewById(ids[i][j]/* String to Hexa*/); 
+         */
+        
         //finding the each cell of the table
         for (i = 0; i < 6; i++)
             for (j = 0; j < 7; j++)
@@ -58,4 +71,3 @@ public class ShowTimeTable extends AppCompatActivity
                 tableCellViews[i][j].setText(timeTableData[i][j]);
     }
 }
-
