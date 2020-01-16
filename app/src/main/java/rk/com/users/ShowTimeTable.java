@@ -26,7 +26,7 @@ public class ShowTimeTable extends AppCompatActivity
 
     public static String[][] timeTableData = {{"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}, {"0", "0", "0", "0", "0", "0", "0"}};
 
-    public static String[][] timeTableData=new String[7][8];
+    //public static String[][] timeTableData=new String[7][8];
     
     @Override
     protected void onCreate(Bundle savedInstanceState)
